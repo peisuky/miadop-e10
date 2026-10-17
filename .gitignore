@@ -1,0 +1,17 @@
+# 原始素材（高解析照片、影片、原稿）不上傳；網站只放壓縮後的成品
+_source/
+
+# 工具產生的偵錯圖
+**/_debug.jpg
+**/_*_debug.jpg
+
+# 系統 / 編輯器
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc
+node_modules/
+
+# 本機預覽設定
+.claude/

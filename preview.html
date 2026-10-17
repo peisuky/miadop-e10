@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品 3D 預覽測試</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #f1eee8; font-family: system-ui, "Noto Sans TC", sans-serif; }
+  .stage { position: relative; width: min(640px, calc(100% - 32px)); aspect-ratio: 4 / 3; margin: 14px auto 0; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.08); touch-action: none; }
+  .stage canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+  .stage canvas:active { cursor: grabbing; }
+  .bar { display: flex; gap: 8px; justify-content: center; margin: 14px 0; flex-wrap: wrap; }
+  .items { margin: 20px 0 0; }
+  .bar button { border: 1.5px solid #ddd; background: #fff; color: #555; border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .bar button.on { background: #ffd23a; border-color: #f0a800; color: #7a4b00; }
+  .hint { text-align: center; color: #999; font-size: 13px; }
+  .err { position: absolute; inset: 0; display: grid; place-items: center; color: #b33; padding: 16px; text-align: center; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+  <div class="bar items">
+    <a href="?item=dog_whitedog"><button>趴趴白狗（厚磚）</button></a>
+    <a href="?item=discover_whitedog"><button>探險白狗（立牌）</button></a>
+    <a href="?item=badge_tarop"><button>紫色徽章</button></a>
+    <a href="?item=ken"><button>Ken 鑰匙圈</button></a>
+    <a href="?item=fread"><button>Fread 鑰匙圈</button></a>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div class="bar">
+    <button data-view="front">正面</button>
+    <button data-view="threeQuarter">斜側</button>
+    <button data-view="side">側面</button>
+    <button data-view="back">背面</button>
+    <button id="auto" class="on">自動旋轉</button>
+  </div>
+  <p class="hint">拖曳旋轉・滾輪 / 雙指縮放</p>
+
+<script type="module">
+  import { createProductViewer } from './viewer/product3d.js';
+
+  // ?item=xxx 指定 assets/xxx/shape.json，之後新增商品只要放素材資料夾
+  const item = new URLSearchParams(location.search).get('item') || 'dog_whitedog';
+  const stage = document.getElementById('stage');
+  document.querySelectorAll('.items a').forEach(a => a.querySelector('button').classList.toggle('on', a.search === `?item=${item}`));
+  try {
+    const v = await createProductViewer(stage, { src: `assets/${item}/shape.json` });
+    document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => v.view(b.dataset.view));
+    const auto = document.getElementById('auto');
+    auto.onclick = () => v.setAutoRotate(auto.classList.toggle('on'));
+    window.viewer = v;
+  } catch (e) {
+    stage.innerHTML = `<div class="err">載入失敗：${e.message}<br>（需要用本機伺服器開啟，不能直接雙擊 html）</div>`;
+    console.error(e);
+  }
+</script>
+</body>
+</html>
