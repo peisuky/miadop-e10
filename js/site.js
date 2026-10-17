@@ -203,8 +203,15 @@ function renderAll() { applyStatic(); renderCreators(); renderGoods(); renderMet
 const modal = $('#modal');
 let cur = null;        // { p, v, items, idx }
 let viewer = null, viewerSeq = 0;
+let pushedModal = false;   // 這次打開視窗時有沒有新增一筆瀏覽紀錄（直接開商品網址時沒有，關閉時就不能按「上一頁」）
 
 function disposeViewer() { viewerSeq++; if (viewer) { viewer.dispose(); viewer = null; } }
+// 停掉展示區裡的影片：dialog 關閉只是隱藏，影片不會自己停，聲音會繼續播
+function stopMedia() {
+  const stage = $('#mStage');
+  stage.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); });
+  stage.replaceChildren();
+}
 
 function openProduct(id, push = true) {
   const [pid, vid] = id.split('/');
@@ -214,7 +221,8 @@ function openProduct(id, push = true) {
   fillModal();
   if (!modal.open) modal.showModal();
   const hash = `#p=${p.id}${v ? '/' + v.id : ''}`;
-  if (push) history.pushState({ modal: true }, '', hash); else history.replaceState({ modal: true }, '', hash);
+  if (push && !modal.open) { history.pushState({ modal: true }, '', hash); pushedModal = true; }
+  else history.replaceState(history.state, '', hash);
   gtagEvent('view_item', { item_id: p.id + (v ? '/' + v.id : '') });
 }
 
@@ -269,7 +277,7 @@ async function showItem(k) {
   cur.idx = k;
   $('#mThumbs').querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', String(j === k)));
   const stage = $('#mStage'), it = cur.items[k];
-  disposeViewer(); stage.replaceChildren(); stage.classList.remove('three');
+  disposeViewer(); stopMedia(); stage.classList.remove('three');
   if (!it) { stage.append(el('div', { class: 'soon-big' }, t('soonCard'))); return; }
   if (it.type === 'img') stage.append(el('img', { src: it.src, alt: L(cur.p.name), width: it.w, height: it.h }));
   else if (it.type === 'video') stage.append(el('video', { src: it.src, poster: it.poster, autoplay: true, muted: true, loop: true, playsinline: true, controls: true }));
@@ -278,7 +286,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018a');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018c');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
@@ -304,16 +312,17 @@ async function showItem(k) {
 
 function closeModal(fromPop = false) {
   if (!modal.open) return;
-  disposeViewer(); modal.close(); cur = null;
-  if (!fromPop && history.state?.modal) history.back();
+  disposeViewer(); stopMedia(); modal.close(); cur = null;
+  if (!fromPop && pushedModal) history.back();
   else if (!fromPop) history.replaceState(null, '', location.pathname + location.search);
+  pushedModal = false;
 }
 $('#mClose').addEventListener('click', () => closeModal());
 modal.addEventListener('cancel', e => { e.preventDefault(); closeModal(); });
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 window.addEventListener('popstate', () => {
   const m = location.hash.match(/^#p=(.+)$/);
-  if (m) openProduct(decodeURIComponent(m[1]), false); else closeModal(true);
+  if (m) openProduct(decodeURIComponent(m[1]), false); else { pushedModal = false; closeModal(true); }
 });
 
 // ---------- 語言 ----------
