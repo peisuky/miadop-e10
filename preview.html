@@ -25,11 +25,11 @@
 </head>
 <body>
   <div class="bar items">
-    <a href="?item=dog_whitedog"><button>趴趴白狗（厚磚）</button></a>
-    <a href="?item=discover_whitedog"><button>探險白狗（立牌）</button></a>
-    <a href="?item=badge_tarop"><button>紫色徽章</button></a>
-    <a href="?item=ken"><button>Ken 鑰匙圈</button></a>
-    <a href="?item=fread"><button>Fread 鑰匙圈</button></a>
+    <a href="?item=3d/whitedog-dinner__whitedog"><button>趴趴白狗（厚磚）</button></a>
+    <a href="?item=3d/whitedog-explorer__whitedog"><button>探險白狗（立牌）</button></a>
+    <a href="?item=3d/peisuky-taro-badge"><button>紫色徽章</button></a>
+    <a href="?item=3d/kenku-keychain__ken"><button>Ken 鑰匙圈</button></a>
+    <a href="?item=3d/kenku-keychain__fread"><button>Fread 鑰匙圈</button></a>
   </div>
   <div class="stage" id="stage"></div>
   <div class="bar">
@@ -45,7 +45,7 @@
   import { createProductViewer } from './viewer/product3d.js';
 
   // ?item=xxx 指定 assets/xxx/shape.json，之後新增商品只要放素材資料夾
-  const item = new URLSearchParams(location.search).get('item') || 'dog_whitedog';
+  const item = new URLSearchParams(location.search).get('item') || '3d/whitedog-dinner__whitedog';
   const stage = document.getElementById('stage');
   document.querySelectorAll('.items a').forEach(a => a.querySelector('button').classList.toggle('on', a.search === `?item=${item}`));
   try {

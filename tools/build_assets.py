@@ -1,0 +1,221 @@
+"""
+把原始素材（_source/ 與服裝資料夾）轉成網站用的檔案，並產生 data/media.json。
+
+  python tools/build_assets.py            # 全部（已存在的檔案會跳過）
+  python tools/build_assets.py --force    # 全部重做
+  python tools/build_assets.py --only photos|videos|brand
+
+輸出：
+  assets/img/<商品>/<款式>/NN.webp      長邊 1600px（視窗大圖）
+  assets/img/<商品>/<款式>/NN_t.webp    長邊 520px（縮圖、商品卡）
+  assets/video/<商品>/NN.mp4 + NN.webp  720p 直式短片 + 封面
+  assets/brand/…                        主視覺、Logo、創作者頭像、地圖
+  data/media.json                       每個商品／款式有哪些照片、影片（網站讀這份）
+
+服裝照片：每款自動挑 OUTFIT_PICKS 張（每個模特兒資料夾平均分配、挑最清楚的），
+挑選結果會寫在 data/media.json；要換照片就改 data/photo-picks.json 後重跑。
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+import tempfile
+
+import cv2
+import numpy as np
+from PIL import Image, ImageOps
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(ROOT, '_source')
+OUTFITS_DIR = r'D:\Videos\kulas-harcy-shirts'
+OUTFIT_PICKS = 8
+BIG, THUMB = 1600, 520
+
+OUTFITS = {   # 資料夾名稱開頭 → 商品編號
+    '儆夜者': 'miadop-nightwatch', '守望者': 'miadop-watcher', '巡牧者': 'miadop-herder',
+    '洞見者': 'miadop-seer', '聽風者': 'miadop-listener',
+}
+PHOTO_SETS = [   # (商品/款式, 資料夾)
+    ('whitedog-dinner/whitedog', 'whitedog/dinner-standee/whitedog'),
+    ('whitedog-dinner/che', 'whitedog/dinner-standee/che'),
+    ('whitedog-dinner/peisuky', 'whitedog/dinner-standee/peisuky'),
+    ('whitedog-explorer/whitedog', 'whitedog/explorer-standee/whitedog'),
+    ('whitedog-explorer/harcy', 'whitedog/explorer-standee/harcy'),
+    ('whitedog-explorer/kulas', 'whitedog/explorer-standee/kulas'),
+    ('whitedog-explorer/peisuky', 'whitedog/explorer-standee/peisuky'),
+    ('peisuky-taro-badge', 'peisuky/taro-badge'),
+    ('miadop-dreamcatcher', 'miadop/dreamcatcher'),
+    ('miadop-grassbag', 'miadop/grassbag'),
+    ('kenku-book', 'kenku/book'),
+    ('kenku-standee', 'kenku/standee'),
+]
+IMG_EXT = ('.jpg', '.jpeg', '.png', '.webp', '.heic')
+
+
+def load(path):
+    """讀圖並轉正；HEIC 交給 ffmpeg 解碼。"""
+    if path.lower().endswith('.heic'):
+        with tempfile.TemporaryDirectory() as d:
+            out = os.path.join(d, 'x.png')
+            subprocess.run(['ffmpeg', '-v', 'error', '-i', path, '-frames:v', '1', '-y', out], check=True)
+            return Image.open(out).convert('RGB')
+    im = Image.open(path)
+    im = ImageOps.exif_transpose(im)
+    if im.mode in ('RGBA', 'LA', 'P'):
+        im = im.convert('RGBA')
+        bg = Image.new('RGB', im.size, (255, 255, 255))
+        bg.paste(im, mask=im.split()[3])
+        return bg
+    return im.convert('RGB')
+
+
+def save_pair(im, out_base, force):
+    """存大圖 + 縮圖，回傳 media 項目。"""
+    big, thumb = out_base + '.webp', out_base + '_t.webp'
+    if force or not os.path.exists(big):
+        os.makedirs(os.path.dirname(big), exist_ok=True)
+        b = im.copy(); b.thumbnail((BIG, BIG), Image.LANCZOS); b.save(big, 'WEBP', quality=80, method=6)
+        t = im.copy(); t.thumbnail((THUMB, THUMB), Image.LANCZOS); t.save(thumb, 'WEBP', quality=74, method=6)
+    w, h = Image.open(big).size
+    rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/')
+    return {'src': rel(big), 'thumb': rel(thumb), 'w': w, 'h': h}
+
+
+def sharpness(path):
+    try:
+        im = load(path); im.thumbnail((640, 640))
+        g = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2GRAY)
+        return float(cv2.Laplacian(g, cv2.CV_64F).var())
+    except Exception as e:
+        print('  skip', path, e)
+        return -1
+
+
+def pick_outfit_photos(folders, n):
+    """每個模特兒資料夾平均分配名額，資料夾內挑最清楚的（維持原本拍攝順序）。"""
+    files = {f: sorted(os.path.join(f, x) for x in os.listdir(f) if x.lower().endswith(IMG_EXT)) for f in folders}
+    files = {f: v for f, v in files.items() if v}
+    quota = {f: n // len(files) for f in files}
+    for f in sorted(files, key=lambda f: -len(files[f]))[: n - sum(quota.values())]:
+        quota[f] += 1
+    picks = []
+    for f, lst in files.items():
+        q = min(quota[f], len(lst))
+        # 先在時間軸上均勻取候選（避免同一組連拍），再依清晰度挑
+        step = max(1, len(lst) // (q * 2))
+        cands = lst[::step]
+        scored = sorted(cands, key=sharpness, reverse=True)[:q]
+        picks += sorted(scored, key=lst.index)
+    return picks
+
+
+def build_photos(media, force):
+    picks_path = os.path.join(ROOT, 'data', 'photo-picks.json')
+    picks = json.load(open(picks_path, encoding='utf-8')) if os.path.exists(picks_path) else {}
+
+    # 服裝
+    for prefix, pid in OUTFITS.items():
+        folders = sorted(os.path.join(OUTFITS_DIR, d) for d in os.listdir(OUTFITS_DIR)
+                         if d.startswith(prefix) and os.path.isdir(os.path.join(OUTFITS_DIR, d)))
+        if pid not in picks:
+            print('picking', pid)
+            picks[pid] = [os.path.relpath(p, OUTFITS_DIR) for p in pick_outfit_photos(folders, OUTFIT_PICKS)]
+        items = []
+        for i, rel in enumerate(picks[pid]):
+            items.append(save_pair(load(os.path.join(OUTFITS_DIR, rel)), os.path.join(ROOT, 'assets', 'img', pid, f'{i + 1:02d}'), force))
+        media.setdefault(pid, {})['photos'] = items
+        print(pid, len(items), 'photos')
+
+    # 其他商品：資料夾裡全部照片
+    for key, rel in PHOTO_SETS:
+        d = os.path.join(SRC, rel)
+        files = sorted(os.path.join(d, x) for x in os.listdir(d) if x.lower().endswith(IMG_EXT)) if os.path.isdir(d) else []
+        items = [save_pair(load(p), os.path.join(ROOT, 'assets', 'img', key, f'{i + 1:02d}'), force) for i, p in enumerate(files)]
+        media.setdefault(key, {})['photos'] = items
+        print(key, len(items), 'photos')
+
+    # Kenku 吊飾：示意圖左右各裁一支
+    kc = load(os.path.join(SRC, 'kenku', 'keychain', 'keychain.png'))
+    W = kc.width
+    for key, box in [('kenku-keychain/ken', (0, 0, int(W * .45), kc.height)), ('kenku-keychain/fread', (int(W * .45), 0, W, kc.height))]:
+        part = kc.crop(box)
+        bbox = ImageOps.invert(part.convert('L')).point(lambda v: 255 if v > 12 else 0).getbbox()
+        part = part.crop((max(0, bbox[0] - 60), max(0, bbox[1] - 60), min(part.width, bbox[2] + 60), min(part.height, bbox[3] + 60)))
+        media.setdefault(key, {})['photos'] = [save_pair(part, os.path.join(ROOT, 'assets', 'img', key, '01'), force)]
+
+    os.makedirs(os.path.dirname(picks_path), exist_ok=True)
+    json.dump(picks, open(picks_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+
+
+def build_videos(media, force):
+    out_dir = os.path.join(OUTFITS_DIR, 'output')
+    vids = sorted(os.listdir(out_dir))
+    for prefix, pid in OUTFITS.items():
+        mine = [v for v in vids if v.endswith('.mp4') and f'-{prefix}-' in v]
+        mine.sort(key=lambda v: ('版' in v, v))          # 基本款在前，模特兒版本在後
+        items = []
+        for i, v in enumerate(mine):
+            base = os.path.join(ROOT, 'assets', 'video', pid, f'{i + 1:02d}')
+            os.makedirs(os.path.dirname(base), exist_ok=True)
+            if force or not os.path.exists(base + '.mp4'):
+                subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', os.path.join(out_dir, v),
+                                '-vf', 'scale=720:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '28',
+                                '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-c:a', 'aac', '-b:a', '96k', base + '.mp4'], check=True)
+                subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '3.5', '-i', base + '.mp4', '-frames:v', '1',
+                                '-vf', 'scale=540:-2', '-c:v', 'libwebp', '-quality', '75', base + '.webp'], check=True)
+            rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/')
+            label = v.replace('miadop-', '').replace('.mp4', '')
+            items.append({'src': rel(base + '.mp4'), 'poster': rel(base + '.webp'), 'label': label})
+        media.setdefault(pid, {})['videos'] = items
+        print(pid, len(items), 'videos')
+
+
+def build_brand(force):
+    out = os.path.join(ROOT, 'assets', 'brand')
+    os.makedirs(out, exist_ok=True)
+    hero = os.path.join(SRC, 'hero')
+    for name, w in [('wide', 1920), ('portrait', 1080)]:
+        im = Image.open(os.path.join(hero, 'out', f'miadop-e10-{name}.png')).convert('RGB')
+        im.save(os.path.join(out, f'hero-{name}.webp'), 'WEBP', quality=82, method=6)
+        small = im.copy(); small.thumbnail((w // 2, w // 2)); small.save(os.path.join(out, f'hero-{name}-sm.webp'), 'WEBP', quality=80, method=6)
+    Image.open(os.path.join(hero, 'out', 'miadop-e10-link.png')).convert('RGB').save(os.path.join(out, 'og.jpg'), quality=86, optimize=True)
+    for name in ['logo_ink', 'logo_paper']:
+        im = Image.open(os.path.join(hero, name + '.png')); im.thumbnail((256, 256)); im.save(os.path.join(out, name.replace('_', '-') + '.png'), optimize=True)
+    for sid in ['axi', 'gugu', 'pei', 'baigou', 'kenku']:
+        im = Image.open(os.path.join(hero, 'stickers', sid + '.png')); im.thumbnail((420, 420))
+        im.save(os.path.join(out, f'avatar-{sid}.webp'), 'WEBP', quality=82, method=6)
+    # 地圖：完整版 + E 排放大版
+    m = Image.open(os.path.join(SRC, 'event', 'map.webp')).convert('RGB')
+    m.save(os.path.join(out, 'map.webp'), 'WEBP', quality=82)
+    m.crop((195, 252, 565, 328)).resize((740, 152), Image.LANCZOS).save(os.path.join(out, 'map-e-row.webp'), 'WEBP', quality=88)
+    # favicon：Logo 放在紙色圓上
+    logo = Image.open(os.path.join(hero, 'logo_ink.png')).convert('RGBA')
+    ico = Image.new('RGBA', (256, 256), (0, 0, 0, 0))
+    from PIL import ImageDraw
+    ImageDraw.Draw(ico).ellipse((4, 4, 252, 252), fill=(246, 238, 216, 255))
+    lg = logo.copy(); lg.thumbnail((168, 168)); ico.paste(lg, ((256 - lg.width) // 2, (256 - lg.height) // 2), lg)
+    ico.save(os.path.join(out, 'favicon.png'))
+    print('brand assets ok')
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--force', action='store_true')
+    ap.add_argument('--only', choices=['photos', 'videos', 'brand'])
+    a = ap.parse_args()
+    media_path = os.path.join(ROOT, 'data', 'media.json')
+    media = json.load(open(media_path, encoding='utf-8')) if os.path.exists(media_path) else {}
+    if a.only in (None, 'brand'):
+        build_brand(a.force)
+    if a.only in (None, 'photos'):
+        build_photos(media, a.force)
+    if a.only in (None, 'videos'):
+        build_videos(media, a.force)
+    os.makedirs(os.path.dirname(media_path), exist_ok=True)
+    json.dump(media, open(media_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    print('wrote', media_path)
+
+
+if __name__ == '__main__':
+    sys.exit(main())

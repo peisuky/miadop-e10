@@ -249,7 +249,7 @@ async function buildBadge(spec, { env, renderer, dir }) {
 
   return {
     root, textures: [color, mat, bump],
-    size: Math.max(w, h + lift) * 0.95, center: lift + h / 2, top: lift + h,
+    size: Math.max(w, h + lift) * 1.4, center: lift + h / 2, top: lift + h,
     foot: [w * 1.3, (t + spec.pin.depth) * 2.2]
   };
 }
@@ -483,7 +483,7 @@ async function buildKeychain(spec, { env, renderer, dir }) {
 
   return {
     root, textures: [tex],
-    size: hookY * 0.9, center: hookY * 0.52, top: hookY,
+    size: hookY * 1.08, center: hookY * 0.5, top: hookY,   // 留邊：圓環在方形畫面裡也不會被切到
     foot: [w * 1.4, w * 0.9],
     hold: {
       // 手的新姿勢先記下來，step() 裡在每個物理小步之間平滑內插過去

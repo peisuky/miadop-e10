@@ -1,0 +1,660 @@
+{
+ "miadop-nightwatch": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-nightwatch/01.webp",
+    "thumb": "assets/img/miadop-nightwatch/01_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/02.webp",
+    "thumb": "assets/img/miadop-nightwatch/02_t.webp",
+    "w": 1600,
+    "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/03.webp",
+    "thumb": "assets/img/miadop-nightwatch/03_t.webp",
+    "w": 1600,
+    "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/04.webp",
+    "thumb": "assets/img/miadop-nightwatch/04_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/05.webp",
+    "thumb": "assets/img/miadop-nightwatch/05_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/06.webp",
+    "thumb": "assets/img/miadop-nightwatch/06_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/07.webp",
+    "thumb": "assets/img/miadop-nightwatch/07_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/08.webp",
+    "thumb": "assets/img/miadop-nightwatch/08_t.webp",
+    "w": 1600,
+    "h": 1067
+   }
+  ],
+  "videos": [
+   {
+    "src": "assets/video/miadop-nightwatch/01.mp4",
+    "poster": "assets/video/miadop-nightwatch/01.webp",
+    "label": "儆夜者-圍巾後背披風款"
+   },
+   {
+    "src": "assets/video/miadop-nightwatch/02.mp4",
+    "poster": "assets/video/miadop-nightwatch/02.webp",
+    "label": "儆夜者-圍巾後背披風款-Walker版"
+   }
+  ]
+ },
+ "miadop-watcher": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-watcher/01.webp",
+    "thumb": "assets/img/miadop-watcher/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/02.webp",
+    "thumb": "assets/img/miadop-watcher/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/03.webp",
+    "thumb": "assets/img/miadop-watcher/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/04.webp",
+    "thumb": "assets/img/miadop-watcher/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/05.webp",
+    "thumb": "assets/img/miadop-watcher/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/06.webp",
+    "thumb": "assets/img/miadop-watcher/06_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/07.webp",
+    "thumb": "assets/img/miadop-watcher/07_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/08.webp",
+    "thumb": "assets/img/miadop-watcher/08_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ],
+  "videos": [
+   {
+    "src": "assets/video/miadop-watcher/01.mp4",
+    "poster": "assets/video/miadop-watcher/01.webp",
+    "label": "守望者-背心款"
+   },
+   {
+    "src": "assets/video/miadop-watcher/02.mp4",
+    "poster": "assets/video/miadop-watcher/02.webp",
+    "label": "守望者-背心款-KulasFur版"
+   }
+  ]
+ },
+ "miadop-herder": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-herder/01.webp",
+    "thumb": "assets/img/miadop-herder/01_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/02.webp",
+    "thumb": "assets/img/miadop-herder/02_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/03.webp",
+    "thumb": "assets/img/miadop-herder/03_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/04.webp",
+    "thumb": "assets/img/miadop-herder/04_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/05.webp",
+    "thumb": "assets/img/miadop-herder/05_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/06.webp",
+    "thumb": "assets/img/miadop-herder/06_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/07.webp",
+    "thumb": "assets/img/miadop-herder/07_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-herder/08.webp",
+    "thumb": "assets/img/miadop-herder/08_t.webp",
+    "w": 1600,
+    "h": 1067
+   }
+  ],
+  "videos": [
+   {
+    "src": "assets/video/miadop-herder/01.mp4",
+    "poster": "assets/video/miadop-herder/01.webp",
+    "label": "巡牧者-v1-獵人回望"
+   },
+   {
+    "src": "assets/video/miadop-herder/02.mp4",
+    "poster": "assets/video/miadop-herder/02.webp",
+    "label": "巡牧者-v2-織紋甦醒"
+   },
+   {
+    "src": "assets/video/miadop-herder/03.mp4",
+    "poster": "assets/video/miadop-herder/03.webp",
+    "label": "巡牧者-大斗篷款-Yaguma版"
+   }
+  ]
+ },
+ "miadop-seer": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-seer/01.webp",
+    "thumb": "assets/img/miadop-seer/01_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/02.webp",
+    "thumb": "assets/img/miadop-seer/02_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/03.webp",
+    "thumb": "assets/img/miadop-seer/03_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/04.webp",
+    "thumb": "assets/img/miadop-seer/04_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/05.webp",
+    "thumb": "assets/img/miadop-seer/05_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/06.webp",
+    "thumb": "assets/img/miadop-seer/06_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/07.webp",
+    "thumb": "assets/img/miadop-seer/07_t.webp",
+    "w": 1600,
+    "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-seer/08.webp",
+    "thumb": "assets/img/miadop-seer/08_t.webp",
+    "w": 1067,
+    "h": 1600
+   }
+  ],
+  "videos": [
+   {
+    "src": "assets/video/miadop-seer/01.mp4",
+    "poster": "assets/video/miadop-seer/01.webp",
+    "label": "洞見者-短斗篷款-v2"
+   },
+   {
+    "src": "assets/video/miadop-seer/02.mp4",
+    "poster": "assets/video/miadop-seer/02.webp",
+    "label": "洞見者-短斗篷款"
+   }
+  ]
+ },
+ "miadop-listener": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-listener/01.webp",
+    "thumb": "assets/img/miadop-listener/01_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/02.webp",
+    "thumb": "assets/img/miadop-listener/02_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/03.webp",
+    "thumb": "assets/img/miadop-listener/03_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/04.webp",
+    "thumb": "assets/img/miadop-listener/04_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/05.webp",
+    "thumb": "assets/img/miadop-listener/05_t.webp",
+    "w": 1600,
+    "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-listener/06.webp",
+    "thumb": "assets/img/miadop-listener/06_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/07.webp",
+    "thumb": "assets/img/miadop-listener/07_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/08.webp",
+    "thumb": "assets/img/miadop-listener/08_t.webp",
+    "w": 1600,
+    "h": 1067
+   }
+  ],
+  "videos": [
+   {
+    "src": "assets/video/miadop-listener/01.mp4",
+    "poster": "assets/video/miadop-listener/01.webp",
+    "label": "聽風者-圍巾款"
+   },
+   {
+    "src": "assets/video/miadop-listener/02.mp4",
+    "poster": "assets/video/miadop-listener/02.webp",
+    "label": "聽風者-圍巾款-Peisuky版"
+   },
+   {
+    "src": "assets/video/miadop-listener/03.mp4",
+    "poster": "assets/video/miadop-listener/03.webp",
+    "label": "聽風者-圍巾款-WalkerFur版"
+   }
+  ]
+ },
+ "whitedog-dinner/whitedog": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-dinner/whitedog/01.webp",
+    "thumb": "assets/img/whitedog-dinner/whitedog/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/whitedog/02.webp",
+    "thumb": "assets/img/whitedog-dinner/whitedog/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/whitedog/03.webp",
+    "thumb": "assets/img/whitedog-dinner/whitedog/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/whitedog/04.webp",
+    "thumb": "assets/img/whitedog-dinner/whitedog/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/whitedog/05.webp",
+    "thumb": "assets/img/whitedog-dinner/whitedog/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-dinner/che": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-dinner/che/01.webp",
+    "thumb": "assets/img/whitedog-dinner/che/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/che/02.webp",
+    "thumb": "assets/img/whitedog-dinner/che/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/che/03.webp",
+    "thumb": "assets/img/whitedog-dinner/che/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/che/04.webp",
+    "thumb": "assets/img/whitedog-dinner/che/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/che/05.webp",
+    "thumb": "assets/img/whitedog-dinner/che/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-dinner/peisuky": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-dinner/peisuky/01.webp",
+    "thumb": "assets/img/whitedog-dinner/peisuky/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/peisuky/02.webp",
+    "thumb": "assets/img/whitedog-dinner/peisuky/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/peisuky/03.webp",
+    "thumb": "assets/img/whitedog-dinner/peisuky/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/peisuky/04.webp",
+    "thumb": "assets/img/whitedog-dinner/peisuky/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-dinner/peisuky/05.webp",
+    "thumb": "assets/img/whitedog-dinner/peisuky/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-explorer/whitedog": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/01.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/02.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/03.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/04.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/05.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/whitedog/06.webp",
+    "thumb": "assets/img/whitedog-explorer/whitedog/06_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-explorer/harcy": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-explorer/harcy/01.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/harcy/02.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/harcy/03.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/harcy/04.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/harcy/05.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/harcy/06.webp",
+    "thumb": "assets/img/whitedog-explorer/harcy/06_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-explorer/kulas": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-explorer/kulas/01.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/kulas/02.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/kulas/03.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/kulas/04.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/kulas/05.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/kulas/06.webp",
+    "thumb": "assets/img/whitedog-explorer/kulas/06_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "whitedog-explorer/peisuky": {
+  "photos": [
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/01.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/02.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/03.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/04.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/05.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/whitedog-explorer/peisuky/06.webp",
+    "thumb": "assets/img/whitedog-explorer/peisuky/06_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "peisuky-taro-badge": {
+  "photos": [
+   {
+    "src": "assets/img/peisuky-taro-badge/01.webp",
+    "thumb": "assets/img/peisuky-taro-badge/01_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/peisuky-taro-badge/02.webp",
+    "thumb": "assets/img/peisuky-taro-badge/02_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/peisuky-taro-badge/03.webp",
+    "thumb": "assets/img/peisuky-taro-badge/03_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/peisuky-taro-badge/04.webp",
+    "thumb": "assets/img/peisuky-taro-badge/04_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/peisuky-taro-badge/05.webp",
+    "thumb": "assets/img/peisuky-taro-badge/05_t.webp",
+    "w": 1200,
+    "h": 1600
+   }
+  ]
+ },
+ "miadop-dreamcatcher": {
+  "photos": []
+ },
+ "miadop-grassbag": {
+  "photos": []
+ },
+ "kenku-book": {
+  "photos": []
+ },
+ "kenku-standee": {
+  "photos": []
+ },
+ "kenku-keychain/ken": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-keychain/ken/01.webp",
+    "thumb": "assets/img/kenku-keychain/ken/01_t.webp",
+    "w": 692,
+    "h": 1217
+   }
+  ]
+ },
+ "kenku-keychain/fread": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-keychain/fread/01.webp",
+    "thumb": "assets/img/kenku-keychain/fread/01_t.webp",
+    "w": 1063,
+    "h": 1508
+   }
+  ]
+ }
+}

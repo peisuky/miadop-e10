@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi'adop 巡獵部落【E10】｜2026 Infurnity 獸無限</title>
+<meta name="description" content="Mi'adop 巡獵部落・攤位 E10・2026 獸無限 Infurnity 餘獸重生。11/01（日）11:00–16:00，台中福容大飯店 麗寶樂園。Mi'adop、Kenku、Peisuky、香酥雞白狗的服裝、新刊、壓克力立牌與徽章，可 3D 預覽。">
+<meta name="theme-color" content="#2b2620">
+<link rel="icon" type="image/png" href="assets/brand/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mi'adop 巡獵部落【E10】｜2026 Infurnity 獸無限">
+<meta property="og:description" content="11/01（日）11:00–16:00・台中福容大飯店 麗寶樂園。服裝、新刊、壓克力立牌、徽章，3D 預覽商品。">
+<meta property="og:image" content="https://peisuky.github.io/miadop-e10/assets/brand/og.jpg">
+<meta property="og:url" content="https://peisuky.github.io/miadop-e10/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=20261017a">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<a class="skip" href="#goods" data-i18n="nav.skip">跳到商品</a>
+
+<header class="topbar">
+  <a class="brandmark" href="#top" aria-label="Mi'adop 巡獵部落">
+    <img src="assets/brand/logo-ink.png" alt="" width="40" height="40">
+    <span><b>MI'ADOP</b><small data-i18n="brand.tribe">巡獵部落</small></span>
+    <em class="booth-chip">E10</em>
+  </a>
+  <nav class="nav" aria-label="主選單">
+    <a href="#creators" data-i18n="nav.creators">創作者</a>
+    <a href="#goods" data-i18n="nav.goods">商品</a>
+    <a href="#howto" data-i18n="nav.howto">購買須知</a>
+    <a href="#location" data-i18n="nav.location">攤位位置</a>
+  </nav>
+  <button class="lang" id="lang" type="button" aria-label="切換語言 / Switch language"><span data-lang="zh">中</span><span data-lang="en">EN</span></button>
+</header>
+
+<div class="notice" id="notice" hidden></div>
+
+<main id="top">
+  <section class="hero">
+    <h1 class="vh" data-i18n="hero.h1">Mi'adop 巡獵部落・攤位 E10・2026 Infurnity 獸無限</h1>
+    <picture>
+      <source media="(max-width: 760px)" srcset="assets/brand/hero-portrait-sm.webp 540w, assets/brand/hero-portrait.webp 1080w" sizes="100vw">
+      <img class="hero-img" src="assets/brand/hero-wide.webp" srcset="assets/brand/hero-wide-sm.webp 960w, assets/brand/hero-wide.webp 1920w" sizes="100vw"
+           alt="紙雕風主視覺：Mi'adop 巡獵部落，攤位 E10，11/01（日）11:00–16:00，台中福容大飯店 麗寶樂園" width="1920" height="1080" fetchpriority="high">
+    </picture>
+    <div class="hero-info wrap">
+      <div class="ticket">
+        <div class="ticket-booth"><small>BOOTH</small><b>E10</b></div>
+        <dl>
+          <div><dt data-i18n="info.when">開放時間</dt><dd data-i18n="info.whenVal">11/01（日）11:00–16:00</dd></div>
+          <div><dt data-i18n="info.where">地點</dt><dd data-i18n="info.whereVal">台中福容大飯店 麗寶樂園・商場區</dd></div>
+        </dl>
+        <p class="ticket-state" id="eventState" hidden></p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-brick" href="#goods" data-i18n="cta.goods">看商品</a>
+        <a class="btn" href="#location" data-i18n="cta.map">攤位位置</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro wrap" aria-labelledby="introTitle">
+    <div class="tag-paper">
+      <p class="eyebrow mo">INFURNITY 2026 ／ THE LAST OF FURS</p>
+      <h2 id="introTitle" class="cut-title" data-i18n="intro.title">荒土上的交易營地</h2>
+      <p data-i18n="intro.body">文明崩落之後，荒土上長出了新的森林。Mi'adop 巡獵部落在這裡生火、編織、交換物資——11 月 1 日，部落的營地就設在 E10。帶上你的故事，來換一件行囊吧。</p>
+    </div>
+  </section>
+
+  <section id="creators" class="section wrap" aria-labelledby="creatorsTitle">
+    <header class="sec-head">
+      <span class="strip mo">CREATORS</span>
+      <h2 id="creatorsTitle" class="cut-title" data-i18n="creators.title">部落的成員</h2>
+    </header>
+    <div class="creators" id="creatorList"></div>
+  </section>
+
+  <section id="goods" class="section wrap" aria-labelledby="goodsTitle">
+    <header class="sec-head">
+      <span class="strip mo">SUPPLIES</span>
+      <h2 id="goodsTitle" class="cut-title" data-i18n="goods.title">營地物資</h2>
+      <p class="sec-sub" data-i18n="goods.sub">點商品可以看大圖；標示 3D 的商品可以拖曳旋轉。</p>
+    </header>
+    <div id="goodsList"></div>
+  </section>
+
+  <section id="howto" class="section wrap" aria-labelledby="howtoTitle">
+    <header class="sec-head">
+      <span class="strip mo">TRADING RULES</span>
+      <h2 id="howtoTitle" class="cut-title" data-i18n="howto.title">購買須知</h2>
+    </header>
+    <ul class="rules">
+      <li><b>💰</b><span><strong data-i18n="howto.cash">只收現金</strong><small data-i18n="howto.cashSub">請準備零錢，感謝配合</small></span></li>
+      <li><b>🧾</b><span><strong data-i18n="howto.one">五位創作者一起結帳</strong><small data-i18n="howto.oneSub">不同創作者的商品可以一次買單</small></span></li>
+      <li><b>🛍️</b><span><strong data-i18n="howto.limit">不限購</strong><small data-i18n="howto.limitSub">數量有限，售完為止</small></span></li>
+      <li><b>📍</b><span><strong data-i18n="howto.date">僅 11/01（日）出攤</strong><small data-i18n="howto.dateSub">11:00–16:00，其他天數不在場喔</small></span></li>
+    </ul>
+  </section>
+
+  <section id="location" class="section wrap" aria-labelledby="locTitle">
+    <header class="sec-head">
+      <span class="strip mo">CAMP LOCATION</span>
+      <h2 id="locTitle" class="cut-title" data-i18n="loc.title">攤位位置</h2>
+      <p class="sec-sub" data-i18n="loc.sub">商場區最上方的 E 排，左邊數來第 10 號。</p>
+    </header>
+    <div class="map-card">
+      <div class="map-erow">
+        <img src="assets/brand/map-e-row.webp" alt="商場區 E 排（E01–E12）放大圖" width="740" height="152" loading="lazy">
+        <span class="pin" style="left:80.3%;top:48.7%"><i></i><b data-i18n="loc.here">E10 在這裡</b></span>
+      </div>
+      <details class="map-full">
+        <summary data-i18n="loc.full">看完整會場地圖</summary>
+        <div class="map-full-img">
+          <img src="assets/brand/map.webp" alt="商場區完整攤位平面圖" width="1600" height="987" loading="lazy">
+          <span class="pin" style="left:30.5%;top:29.3%"><i></i></span>
+        </div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="ground">
+  <div class="wrap foot">
+    <img src="assets/brand/logo-paper.png" alt="" width="56" height="56">
+    <p class="foot-title"><b>Mi'adop 巡獵部落</b> ・ E10 ・ 2026 Infurnity 獸無限</p>
+    <p data-i18n="foot.copy">所有作品著作權屬於各創作者：阿爾西、Kulas、Kenku、Peisuky、香酥雞白狗。</p>
+    <p class="foot-small" id="gaNote" hidden data-i18n="foot.ga">本站使用 Google Analytics 統計瀏覽量。</p>
+    <p class="foot-small" id="sync"></p>
+  </div>
+</footer>
+
+<dialog class="modal" id="modal" aria-labelledby="mName">
+  <div class="modal-inner">
+    <button class="modal-close" type="button" id="mClose" aria-label="關閉">✕</button>
+    <div class="modal-media">
+      <div class="stage" id="mStage"></div>
+      <div class="thumbs" id="mThumbs" role="tablist"></div>
+    </div>
+    <div class="modal-info">
+      <p class="m-brand" id="mBrand"></p>
+      <h3 id="mName"></h3>
+      <p class="m-sub" id="mSub"></p>
+      <div class="variants" id="mVariants" role="radiogroup"></div>
+      <div class="m-price"><span id="mPrice"></span><em class="status" id="mStatus"></em></div>
+      <p class="m-lore" id="mLore"></p>
+      <ul class="m-specs" id="mSpecs"></ul>
+      <p class="m-note" id="mNote" hidden></p>
+    </div>
+  </div>
+</dialog>
+
+<script type="module" src="js/site.js?v=20261017a"></script>
+</body>
+</html>
