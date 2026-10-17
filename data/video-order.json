@@ -1,0 +1,12 @@
+{
+ "_說明": "服裝影片的顯示順序（第一支 = 點進商品後直接播放的影片）。填影片的 label（output 資料夾檔名去掉 miadop- 和 .mp4），沒列到的排在後面。改完執行 python tools/build_assets.py --only videos",
+ "miadop-seer": [
+  "洞見者-短斗篷款",
+  "洞見者-短斗篷款-v2"
+ ],
+ "miadop-listener": [
+  "聽風者-圍巾款-WalkerFur版",
+  "聽風者-圍巾款",
+  "聽風者-圍巾款-Peisuky版"
+ ]
+}

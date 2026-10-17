@@ -217,6 +217,8 @@ def build_photos(media, force):
 def build_videos(media, force):
     out_dir = os.path.join(OUTFITS_DIR, 'output')
     vids = sorted(os.listdir(out_dir))
+    order_path = os.path.join(ROOT, 'data', 'video-order.json')
+    order = json.load(open(order_path, encoding='utf-8')) if os.path.exists(order_path) else {}
     for prefix, pid in OUTFITS.items():
         mine = [v for v in vids if v.endswith('.mp4') and f'-{prefix}-' in v]
         mine.sort(key=lambda v: ('版' in v, v))          # 基本款在前，模特兒版本在後
@@ -233,8 +235,12 @@ def build_videos(media, force):
             rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/')
             label = v.replace('miadop-', '').replace('.mp4', '')
             items.append({'src': rel(base + '.mp4'), 'poster': rel(base + '.webp'), 'label': label})
+        # 顯示順序：data/video-order.json 有列的照列的順序排在前面，其餘維持預設（檔名編號不變，不用重轉）
+        want = order.get(pid, [])
+        rank = {it['label']: (want.index(it['label']) if it['label'] in want else len(want) + i) for i, it in enumerate(items)}
+        items.sort(key=lambda it: rank[it['label']])
         media.setdefault(pid, {})['videos'] = items
-        print(pid, len(items), 'videos')
+        print(pid, len(items), 'videos:', ' / '.join(it['label'] for it in items))
 
 
 def build_brand(force):

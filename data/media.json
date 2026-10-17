@@ -249,14 +249,14 @@
   ],
   "videos": [
    {
-    "src": "assets/video/miadop-seer/01.mp4",
-    "poster": "assets/video/miadop-seer/01.webp",
-    "label": "洞見者-短斗篷款-v2"
-   },
-   {
     "src": "assets/video/miadop-seer/02.mp4",
     "poster": "assets/video/miadop-seer/02.webp",
     "label": "洞見者-短斗篷款"
+   },
+   {
+    "src": "assets/video/miadop-seer/01.mp4",
+    "poster": "assets/video/miadop-seer/01.webp",
+    "label": "洞見者-短斗篷款-v2"
    }
   ]
  },
@@ -313,6 +313,11 @@
   ],
   "videos": [
    {
+    "src": "assets/video/miadop-listener/03.mp4",
+    "poster": "assets/video/miadop-listener/03.webp",
+    "label": "聽風者-圍巾款-WalkerFur版"
+   },
+   {
     "src": "assets/video/miadop-listener/01.mp4",
     "poster": "assets/video/miadop-listener/01.webp",
     "label": "聽風者-圍巾款"
@@ -321,11 +326,6 @@
     "src": "assets/video/miadop-listener/02.mp4",
     "poster": "assets/video/miadop-listener/02.webp",
     "label": "聽風者-圍巾款-Peisuky版"
-   },
-   {
-    "src": "assets/video/miadop-listener/03.mp4",
-    "poster": "assets/video/miadop-listener/03.webp",
-    "label": "聽風者-圍巾款-WalkerFur版"
    }
   ]
  },
