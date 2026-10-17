@@ -148,7 +148,7 @@ function renderCreators() {
 }
 
 function card(p) {
-  const s = summary(p), v0 = p.variants?.[0], m = mediaOf(p, v0), cover = m.photos?.[0];
+  const s = summary(p), v0 = p.variants?.[0], m = mediaOf(p, v0), cover = MEDIA[p.id]?.cover || m.photos?.[0];   // 有指定封面就用封面
   const has3d = p.three || p.variants?.some(v => v.three), hasVid = MEDIA[p.id]?.videos?.length;
   const badges = el('div', { class: 'badges' },
     p.isNew ? el('span', { class: 'badge new' }, t('new')) : null,
@@ -278,7 +278,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261017b');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018a');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });

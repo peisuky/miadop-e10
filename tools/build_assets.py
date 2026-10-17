@@ -51,6 +51,11 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('kenku-standee', 'kenku/standee'),
 ]
 IMG_EXT = ('.jpg', '.jpeg', '.png', '.webp', '.heic')
+COVERS = {   # 商品卡封面另外指定（沒指定就用第一款的第一張照片）
+    'whitedog-dinner': 'whitedog/dinner-standee/IMG_1009.jpg',
+}
+CARD_ASPECT = 4 / 5   # 商品卡圖片比例（寬 / 高），和 css 的 .card .ph 一致
+CARD_FIT = 0.72       # 商品最長邊佔畫面的比例；一般正面照的商品面積會 > 1/3
 
 
 def load(path):
@@ -80,6 +85,53 @@ def save_pair(im, out_base, force):
     w, h = Image.open(big).size
     rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/')
     return {'src': rel(big), 'thumb': rel(thumb), 'w': w, 'h': h}
+
+
+def product_bbox(im):
+    """商品在照片裡的位置 (x, y, w, h)：找「有邊緣或有顏色」的區域，扣掉橫跨整張的桌緣線，
+    取最大塊再併入貼著它的小塊（底座、壓克力邊）。背景是素色牆面＋桌面的商品照適用。"""
+    W, H = im.size
+    s = 640 / max(W, H)
+    small = np.array(im.resize((max(1, round(W * s)), max(1, round(H * s)))))
+    g = cv2.GaussianBlur(cv2.cvtColor(small, cv2.COLOR_RGB2GRAY), (5, 5), 0)
+    mag = cv2.magnitude(cv2.Sobel(g, cv2.CV_32F, 1, 0), cv2.Sobel(g, cv2.CV_32F, 0, 1))
+    sat = cv2.cvtColor(small, cv2.COLOR_RGB2HSV)[..., 1]
+    m = ((mag > 60) | (sat > 70)).astype(np.uint8) * 255      # 門檻夠高，柔和的陰影邊不會被算進去
+    horiz = cv2.morphologyEx(m, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (small.shape[1] // 3, 1)))
+    m = cv2.subtract(m, cv2.dilate(horiz, np.ones((5, 5), np.uint8)))
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15)))
+    n, _, st, _ = cv2.connectedComponentsWithStats(m)
+    if n <= 1:
+        return None
+    big = 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
+    x, y, w, h = (int(v) for v in st[big, :4])
+    for i in range(1, n):
+        if i == big or st[i, cv2.CC_STAT_AREA] < st[big, cv2.CC_STAT_AREA] * 0.05:
+            continue
+        xi, yi, wi, hi = (int(v) for v in st[i, :4])
+        if xi < x + w + 20 and xi + wi > x - 20 and yi < y + h + 20 and yi + hi > y - 20:
+            x2, y2 = max(x + w, xi + wi), max(y + h, yi + hi); x, y = min(x, xi), min(y, yi); w, h = x2 - x, y2 - y
+    return tuple(round(v / s) for v in (x, y, w, h))
+
+
+def card_crop(im, bbox=None, fit=CARD_FIT):
+    """裁成商品卡比例，商品置中、最長邊佔約 CARD_FIT。照片不夠大時就用到照片邊界為止。"""
+    bbox = bbox or product_bbox(im)
+    if not bbox:
+        return im
+    x, y, w, h = bbox
+    cw = max(w / fit, h / fit * CARD_ASPECT)
+    ch = cw / CARD_ASPECT
+    cx, cy = x + w / 2, y + h / 2
+    left, top = round(cx - cw / 2), round(cy - ch / 2)
+    right, bottom = round(cx + cw / 2), round(cy + ch / 2)
+    # 裁切框超出照片時不移動框（會讓商品偏掉），而是把照片邊緣的顏色往外延伸補滿
+    pad = [max(0, -left), max(0, -top), max(0, right - im.width), max(0, bottom - im.height)]
+    if any(pad):
+        a = cv2.copyMakeBorder(np.array(im), pad[1], pad[3], pad[0], pad[2], cv2.BORDER_REPLICATE)
+        im = Image.fromarray(a)
+        left, top, right, bottom = left + pad[0], top + pad[1], right + pad[0], bottom + pad[1]
+    return im.crop((left, top, right, bottom))
 
 
 def sharpness(path):
@@ -136,22 +188,27 @@ def build_photos(media, force):
         media.setdefault(pid, {})['photos'] = items
         print(pid, len(items), 'photos')
 
-    # 其他商品：資料夾裡全部照片
+    # 其他商品：資料夾裡全部照片，裁成商品置中的卡片比例（服裝照是情境照，不裁）
     for key, rel in PHOTO_SETS:
         d = os.path.join(SRC, rel)
         files = sorted(os.path.join(d, x) for x in os.listdir(d) if x.lower().endswith(IMG_EXT)) if os.path.isdir(d) else []
-        items = [save_pair(load(p), os.path.join(ROOT, 'assets', 'img', key, f'{i + 1:02d}'), force) for i, p in enumerate(files)]
+        items = [save_pair(card_crop(load(p)), os.path.join(ROOT, 'assets', 'img', key, f'{i + 1:02d}'), force) for i, p in enumerate(files)]
         media.setdefault(key, {})['photos'] = items
         print(key, len(items), 'photos')
+
+    # 指定的商品卡封面
+    for key, rel in COVERS.items():
+        media.setdefault(key, {})['cover'] = save_pair(card_crop(load(os.path.join(SRC, rel)), fit=0.92),   # 封面多為橫排合照：撐滿寬度
+                                             os.path.join(ROOT, 'assets', 'img', key, 'cover'), force)
+        print(key, 'cover')
 
     # Kenku 吊飾：示意圖左右各裁一支
     kc = load(os.path.join(SRC, 'kenku', 'keychain', 'keychain.png'))
     W = kc.width
     for key, box in [('kenku-keychain/ken', (0, 0, int(W * .45), kc.height)), ('kenku-keychain/fread', (int(W * .45), 0, W, kc.height))]:
         part = kc.crop(box)
-        bbox = ImageOps.invert(part.convert('L')).point(lambda v: 255 if v > 12 else 0).getbbox()
-        part = part.crop((max(0, bbox[0] - 60), max(0, bbox[1] - 60), min(part.width, bbox[2] + 60), min(part.height, bbox[3] + 60)))
-        media.setdefault(key, {})['photos'] = [save_pair(part, os.path.join(ROOT, 'assets', 'img', key, '01'), force)]
+        bb = ImageOps.invert(part.convert('L')).point(lambda v: 255 if v > 12 else 0).getbbox()   # 白底，直接找非白色範圍
+        media.setdefault(key, {})['photos'] = [save_pair(card_crop(part, (bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1])), os.path.join(ROOT, 'assets', 'img', key, '01'), force)]
 
     os.makedirs(os.path.dirname(picks_path), exist_ok=True)
     json.dump(picks, open(picks_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
