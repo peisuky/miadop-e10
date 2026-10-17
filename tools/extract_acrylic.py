@@ -47,6 +47,8 @@ def main():
     ap.add_argument("--base", help="底座，例如 disc:45:5（圓盤 直徑 45mm 厚 5mm）")
     ap.add_argument("--tab-mm", type=float, default=16, help="插進底座的插腳寬度（mm，有 --base 才用）")
     ap.add_argument("--white", type=float, default=246, help="photo 模式：白色毛校正後的亮度")
+    ap.add_argument("--saturation", type=float, default=1.0,
+                    help="photo 模式：彩度倍率。色彩濃的角色建議 0.75（校正對比時彩度會被一起拉高，容易過豔）")
     ap.add_argument("--thickness-mm", type=float, default=10.0, help="壓克力厚度（mm）")
     ap.add_argument("--dark", type=int, default=95, help="灰階低於此值算黑線")
     ap.add_argument("--base-gray", type=float, default=214, help="灰底提亮後的目標亮度")
@@ -129,6 +131,10 @@ def main():
         bal = np.clip((bal - lo) * 255.0 / (255.0 - lo), 0, 255)
         sharp = cv2.addWeighted(bal, 1.5, cv2.GaussianBlur(bal, (0, 0), 1.6), -0.5, 0)
         out[..., :3] = np.clip(sharp, 0, 255).astype(np.uint8)
+        if a.saturation != 1.0:
+            hsv2 = cv2.cvtColor(out[..., :3], cv2.COLOR_BGR2HSV).astype(np.float32)
+            hsv2[..., 1] *= a.saturation
+            out[..., :3] = cv2.cvtColor(np.clip(hsv2, 0, 255).astype(np.uint8), cv2.COLOR_HSV2BGR)
         print(f"white point {wp.round(1)}")
     out[..., 3] = inside.astype(np.uint8) * 255 if a.mode == "photo" else (labels > 0).astype(np.uint8) * 255
     # 邊緣反鋸齒
