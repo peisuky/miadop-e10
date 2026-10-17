@@ -121,9 +121,18 @@ def build_photos(media, force):
         if pid not in picks:
             print('picking', pid)
             picks[pid] = [os.path.relpath(p, OUTFITS_DIR) for p in pick_outfit_photos(folders, OUTFIT_PICKS)]
-        items = []
-        for i, rel in enumerate(picks[pid]):
-            items.append(save_pair(load(os.path.join(OUTFITS_DIR, rel)), os.path.join(ROOT, 'assets', 'img', pid, f'{i + 1:02d}'), force))
+        # 檔名用「模特兒資料夾最後一段 + 原檔名」：換照片時不會撞到舊檔，沒用到的舊檔順手清掉
+        out_dir = os.path.join(ROOT, 'assets', 'img', pid)
+        items, keep = [], set()
+        for rel in picks[pid]:
+            folder, fname = os.path.split(rel.replace('/', os.sep))
+            stem = (folder.split('_')[-1] + '-' + os.path.splitext(fname)[0]).replace(' ', '')
+            keep |= {stem + '.webp', stem + '_t.webp'}
+            items.append(save_pair(load(os.path.join(OUTFITS_DIR, rel)), os.path.join(out_dir, stem), force))
+        if os.path.isdir(out_dir):
+            for f in os.listdir(out_dir):
+                if f not in keep:
+                    os.remove(os.path.join(out_dir, f))
         media.setdefault(pid, {})['photos'] = items
         print(pid, len(items), 'photos')
 

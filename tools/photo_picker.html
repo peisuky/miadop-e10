@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>服裝選片</title>
+<style>
+  :root { --paper: #f6eed8; --sky: #f1dfa9; --ink: #1c1b18; --brick: #c4553a; --kraft: #c39a63; --cream: #e6d7ab; --olive: #9aa567; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 'Noto Sans TC', system-ui, sans-serif; background: var(--sky); color: var(--ink); }
+  header { position: sticky; top: 0; z-index: 5; background: var(--ink); color: var(--paper); padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  header h1 { margin: 0 8px 0 0; font-size: 18px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tabs button { border: 2px solid var(--paper); background: none; color: var(--paper); border-radius: 999px; padding: 5px 12px; font: 700 14px/1 inherit; cursor: pointer; }
+  .tabs button.on { background: var(--paper); color: var(--ink); }
+  .tabs button i { font-style: normal; opacity: .7; margin-left: 4px; }
+  .tabs button.dirty::after { content: '●'; color: var(--brick); margin-left: 4px; }
+  .save { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+  .save button { border: 0; background: var(--brick); color: var(--paper); font: 900 15px/1 inherit; padding: 10px 18px; border-radius: 6px; cursor: pointer; }
+  .save button:disabled { opacity: .45; cursor: default; }
+  #msg { font-size: 13px; opacity: .85; }
+  main { padding: 16px; max-width: 1400px; margin: auto; }
+  h2 { margin: 6px 0 4px; font-size: 20px; }
+  .hint { margin: 0 0 12px; font-size: 13.5px; opacity: .8; }
+  .picked { background: var(--paper); border-radius: 8px; padding: 12px; min-height: 140px; display: flex; gap: 10px; overflow-x: auto; box-shadow: 0 4px 10px rgba(42,26,8,.25); }
+  .picked:empty::before { content: '還沒有選照片：點下方照片加入'; opacity: .6; align-self: center; }
+  .pk { position: relative; flex: none; width: 120px; cursor: grab; }
+  .pk img { width: 120px; height: 150px; object-fit: cover; border-radius: 5px; display: block; }
+  .pk.cover img { outline: 4px solid var(--brick); }
+  .pk .n { position: absolute; left: 4px; top: 4px; background: var(--ink); color: var(--paper); font: 900 13px/1 inherit; padding: 4px 7px; border-radius: 4px; }
+  .pk.cover .n::after { content: ' 封面'; }
+  .pk .ctl { display: flex; justify-content: space-between; margin-top: 4px; }
+  .pk .ctl button { border: 0; background: var(--cream); border-radius: 4px; width: 34px; height: 26px; cursor: pointer; font-size: 13px; }
+  .pk.drag { opacity: .4; }
+  .group { margin-top: 22px; }
+  .group h3 { margin: 0 0 8px; font-size: 16px; }
+  .group h3 small { font-weight: 400; opacity: .7; margin-left: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .ph { position: relative; border: 0; padding: 0; background: var(--cream); border-radius: 6px; overflow: hidden; cursor: pointer; aspect-ratio: 4/5; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .15s; }
+  .ph:hover img { transform: scale(1.04); }
+  .ph.on { outline: 4px solid var(--brick); }
+  .ph .n { position: absolute; left: 6px; top: 6px; background: var(--brick); color: var(--paper); font: 900 14px/1 inherit; padding: 5px 8px; border-radius: 4px; }
+  .ph .zoom { position: absolute; right: 6px; bottom: 6px; background: rgba(28,27,24,.7); color: #fff; border-radius: 4px; padding: 2px 7px; font-size: 13px; }
+  .ph .fn { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,.55)); color: #fff; font-size: 11px; padding: 14px 6px 4px; text-align: left; }
+  dialog { border: 0; padding: 0; background: none; max-width: 92vw; max-height: 92vh; }
+  dialog::backdrop { background: rgba(0,0,0,.8); }
+  dialog img { max-width: 92vw; max-height: 92vh; display: block; border-radius: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>服裝選片</h1>
+  <div class="tabs" id="tabs"></div>
+  <div class="save"><span id="msg"></span><button id="save" disabled>儲存並更新網站照片</button></div>
+</header>
+<main>
+  <h2 id="title"></h2>
+  <p class="hint">點照片加入／移除。上方是網站會顯示的順序，第 1 張是商品卡封面；可以拖曳或用 ◀ ▶ 調整順序。建議每款 6～10 張。照片右下角 🔍 可以放大看。</p>
+  <div class="picked" id="picked"></div>
+  <div id="groups"></div>
+</main>
+<dialog id="zoom"><img id="zoomImg" alt=""></dialog>
+<script>
+  let OUT = [], PICKS = {}, SAVED = {}, cur = 0;
+  const $ = (s) => document.querySelector(s);
+  const th = (rel) => '/thumb?f=' + encodeURIComponent(rel);
+  const short = (rel) => rel.split(/[\\/]/).pop();
+  const dirty = (id) => JSON.stringify(PICKS[id] || []) !== JSON.stringify(SAVED[id] || []);
+
+  async function load() {
+    const d = await (await fetch('/api/data')).json();
+    OUT = d.outfits; PICKS = structuredClone(d.picks); SAVED = structuredClone(d.picks);
+    render();
+  }
+  function render() {
+    const o = OUT[cur], picks = PICKS[o.id] = PICKS[o.id] || [];
+    $('#tabs').innerHTML = '';
+    OUT.forEach((x, i) => {
+      const b = document.createElement('button');
+      b.className = (i === cur ? 'on ' : '') + (dirty(x.id) ? 'dirty' : '');
+      b.innerHTML = `${x.name.split('・')[0]}<i>${(PICKS[x.id] || []).length}</i>`;
+      b.onclick = () => { cur = i; render(); };
+      $('#tabs').append(b);
+    });
+    $('#title').textContent = o.name;
+    const anyDirty = OUT.some(x => dirty(x.id));
+    $('#save').disabled = !anyDirty;
+    if (anyDirty) $('#msg').textContent = '有尚未儲存的變更';
+
+    const pk = $('#picked'); pk.innerHTML = '';
+    picks.forEach((rel, i) => {
+      const d = document.createElement('div');
+      d.className = 'pk' + (i === 0 ? ' cover' : ''); d.draggable = true;
+      d.innerHTML = `<img src="${th(rel)}" alt=""><span class="n">${i + 1}</span><div class="ctl"><button title="往前">◀</button><button title="移除">✕</button><button title="往後">▶</button></div>`;
+      const [l, x, r] = d.querySelectorAll('button');
+      l.onclick = () => move(i, i - 1); r.onclick = () => move(i, i + 1); x.onclick = () => toggle(rel);
+      d.ondragstart = (e) => { e.dataTransfer.setData('text/plain', i); d.classList.add('drag'); };
+      d.ondragend = () => d.classList.remove('drag');
+      d.ondragover = (e) => e.preventDefault();
+      d.ondrop = (e) => { e.preventDefault(); move(+e.dataTransfer.getData('text/plain'), i); };
+      pk.append(d);
+    });
+
+    const gs = $('#groups'); gs.innerHTML = '';
+    for (const g of o.groups) {
+      const sec = document.createElement('section'); sec.className = 'group';
+      sec.innerHTML = `<h3>${g.model}<small>${g.files.length} 張・${g.folder}</small></h3><div class="grid"></div>`;
+      const grid = sec.querySelector('.grid');
+      for (const rel of g.files) {
+        const k = picks.indexOf(rel);
+        const b = document.createElement('button');
+        b.className = 'ph' + (k >= 0 ? ' on' : '');
+        b.innerHTML = `<img loading="lazy" src="${th(rel)}" alt="">${k >= 0 ? `<span class="n">${k + 1}</span>` : ''}<span class="fn">${short(rel)}</span><span class="zoom" title="放大">🔍</span>`;
+        b.onclick = (e) => { if (e.target.classList.contains('zoom')) { $('#zoomImg').src = th(rel); $('#zoom').showModal(); } else toggle(rel); };
+        grid.append(b);
+      }
+      gs.append(sec);
+    }
+  }
+  function toggle(rel) {
+    const p = PICKS[OUT[cur].id], k = p.indexOf(rel);
+    if (k >= 0) p.splice(k, 1); else p.push(rel);
+    render();
+  }
+  function move(a, b) {
+    const p = PICKS[OUT[cur].id];
+    if (b < 0 || b >= p.length || a === b) return;
+    const [x] = p.splice(a, 1); p.splice(b, 0, x); render();
+  }
+  $('#zoom').onclick = () => $('#zoom').close();
+  $('#save').onclick = async () => {
+    $('#save').disabled = true; $('#msg').textContent = '儲存中，正在重轉照片（約 10～60 秒）…';
+    const changed = Object.fromEntries(OUT.filter(x => dirty(x.id)).map(x => [x.id, PICKS[x.id]]));
+    try {
+      const r = await (await fetch('/api/save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ picks: changed }) })).json();
+      if (!r.ok) throw new Error(r.log);
+      SAVED = structuredClone(PICKS); $('#msg').textContent = '已儲存，網站照片已更新 ✓（本機預覽重新整理即可看到，上線需 commit / push）';
+    } catch (e) { $('#msg').textContent = '儲存失敗：' + e.message.slice(-200); }
+    render();
+  };
+  window.addEventListener('beforeunload', (e) => { if (OUT.some(x => dirty(x.id))) { e.preventDefault(); e.returnValue = ''; } });
+  load();
+</script>
+</body>
+</html>
