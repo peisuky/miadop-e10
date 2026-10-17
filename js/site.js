@@ -278,7 +278,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261017a');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261017b');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
