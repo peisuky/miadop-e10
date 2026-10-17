@@ -2,8 +2,8 @@
  "miadop-nightwatch": {
   "photos": [
    {
-    "src": "assets/img/miadop-nightwatch/01-DSC_9648.webp",
-    "thumb": "assets/img/miadop-nightwatch/01-DSC_9648_t.webp",
+    "src": "assets/img/miadop-nightwatch/01-DSC_9668.webp",
+    "thumb": "assets/img/miadop-nightwatch/01-DSC_9668_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -14,10 +14,10 @@
     "h": 1067
    },
    {
-    "src": "assets/img/miadop-nightwatch/01-DSC_9669.webp",
-    "thumb": "assets/img/miadop-nightwatch/01-DSC_9669_t.webp",
-    "w": 1600,
-    "h": 1067
+    "src": "assets/img/miadop-nightwatch/01-DSC_9648.webp",
+    "thumb": "assets/img/miadop-nightwatch/01-DSC_9648_t.webp",
+    "w": 1067,
+    "h": 1600
    },
    {
     "src": "assets/img/miadop-nightwatch/01-DSC_9675.webp",
@@ -38,16 +38,16 @@
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-nightwatch/02-DSC_9727.webp",
-    "thumb": "assets/img/miadop-nightwatch/02-DSC_9727_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
     "src": "assets/img/miadop-nightwatch/02-DSC_9966.webp",
     "thumb": "assets/img/miadop-nightwatch/02-DSC_9966_t.webp",
     "w": 1600,
     "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-nightwatch/02-DSC_9879.webp",
+    "thumb": "assets/img/miadop-nightwatch/02-DSC_9879_t.webp",
+    "w": 1067,
+    "h": 1600
    }
   ],
   "videos": [
@@ -66,8 +66,14 @@
  "miadop-watcher": {
   "photos": [
    {
-    "src": "assets/img/miadop-watcher/Kulas-IMG_4864.webp",
-    "thumb": "assets/img/miadop-watcher/Kulas-IMG_4864_t.webp",
+    "src": "assets/img/miadop-watcher/Kulas-IMG_4888.webp",
+    "thumb": "assets/img/miadop-watcher/Kulas-IMG_4888_t.webp",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-watcher/Kulas-IMG_4937.webp",
+    "thumb": "assets/img/miadop-watcher/Kulas-IMG_4937_t.webp",
     "w": 1200,
     "h": 1600
    },
@@ -78,16 +84,10 @@
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-watcher/Kulas-IMG_4917.webp",
-    "thumb": "assets/img/miadop-watcher/Kulas-IMG_4917_t.webp",
-    "w": 1200,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-watcher/Kulas-IMG_4937.webp",
-    "thumb": "assets/img/miadop-watcher/Kulas-IMG_4937_t.webp",
-    "w": 1200,
-    "h": 1600
+    "src": "assets/img/miadop-watcher/Kulas-1791724280600.webp",
+    "thumb": "assets/img/miadop-watcher/Kulas-1791724280600_t.webp",
+    "w": 1108,
+    "h": 1477
    },
    {
     "src": "assets/img/miadop-watcher/KulasFur-IMG_4776.webp",
@@ -130,14 +130,14 @@
  "miadop-herder": {
   "photos": [
    {
-    "src": "assets/img/miadop-herder/Peisuky-DSC_9625.webp",
-    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9625_t.webp",
+    "src": "assets/img/miadop-herder/Peisuky-DSC_9642.webp",
+    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9642_t.webp",
     "w": 1067,
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-herder/Peisuky-DSC_9642.webp",
-    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9642_t.webp",
+    "src": "assets/img/miadop-herder/Peisuky-DSC_9619.webp",
+    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9619_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -148,8 +148,8 @@
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-herder/Peisuky-DSC_9756.webp",
-    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9756_t.webp",
+    "src": "assets/img/miadop-herder/Peisuky-DSC_9791.webp",
+    "thumb": "assets/img/miadop-herder/Peisuky-DSC_9791_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -199,26 +199,8 @@
  "miadop-seer": {
   "photos": [
    {
-    "src": "assets/img/miadop-seer/Kulas-DSC_0373.webp",
-    "thumb": "assets/img/miadop-seer/Kulas-DSC_0373_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-seer/Kulas-DSC_0382.webp",
-    "thumb": "assets/img/miadop-seer/Kulas-DSC_0382_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-seer/Kulas-DSC_0387.webp",
-    "thumb": "assets/img/miadop-seer/Kulas-DSC_0387_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-seer/Kulas-DSC_0389.webp",
-    "thumb": "assets/img/miadop-seer/Kulas-DSC_0389_t.webp",
+    "src": "assets/img/miadop-seer/Yaguma-DSC_9851.webp",
+    "thumb": "assets/img/miadop-seer/Yaguma-DSC_9851_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -235,14 +217,32 @@
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-seer/Yaguma-DSC_9834.webp",
-    "thumb": "assets/img/miadop-seer/Yaguma-DSC_9834_t.webp",
-    "w": 1600,
-    "h": 1067
-   },
-   {
     "src": "assets/img/miadop-seer/Yaguma-DSC_9866.webp",
     "thumb": "assets/img/miadop-seer/Yaguma-DSC_9866_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/Kulas-DSC_0387.webp",
+    "thumb": "assets/img/miadop-seer/Kulas-DSC_0387_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/Kulas-DSC_0373.webp",
+    "thumb": "assets/img/miadop-seer/Kulas-DSC_0373_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/Kulas-DSC_0389.webp",
+    "thumb": "assets/img/miadop-seer/Kulas-DSC_0389_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-seer/Kulas-DSC_0366.webp",
+    "thumb": "assets/img/miadop-seer/Kulas-DSC_0366_t.webp",
     "w": 1067,
     "h": 1600
    }
@@ -263,14 +263,8 @@
  "miadop-listener": {
   "photos": [
    {
-    "src": "assets/img/miadop-listener/Peisuky-DSC_0412.webp",
-    "thumb": "assets/img/miadop-listener/Peisuky-DSC_0412_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-listener/Peisuky-DSC_0419.webp",
-    "thumb": "assets/img/miadop-listener/Peisuky-DSC_0419_t.webp",
+    "src": "assets/img/miadop-listener/WalkerFur-DSC_0218.webp",
+    "thumb": "assets/img/miadop-listener/WalkerFur-DSC_0218_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -281,26 +275,20 @@
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-listener/WalkerFur-DSC_0218.webp",
-    "thumb": "assets/img/miadop-listener/WalkerFur-DSC_0218_t.webp",
-    "w": 1067,
-    "h": 1600
-   },
-   {
-    "src": "assets/img/miadop-listener/WalkerFur-DSC_0279.webp",
-    "thumb": "assets/img/miadop-listener/WalkerFur-DSC_0279_t.webp",
+    "src": "assets/img/miadop-listener/WalkerFur-DSC_0291.webp",
+    "thumb": "assets/img/miadop-listener/WalkerFur-DSC_0291_t.webp",
     "w": 1600,
     "h": 1067
    },
    {
-    "src": "assets/img/miadop-listener/Yaguma-DSC_9481.webp",
-    "thumb": "assets/img/miadop-listener/Yaguma-DSC_9481_t.webp",
+    "src": "assets/img/miadop-listener/Yaguma-DSC_9550.webp",
+    "thumb": "assets/img/miadop-listener/Yaguma-DSC_9550_t.webp",
     "w": 1067,
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-listener/Yaguma-DSC_9526.webp",
-    "thumb": "assets/img/miadop-listener/Yaguma-DSC_9526_t.webp",
+    "src": "assets/img/miadop-listener/Yaguma-DSC_9533.webp",
+    "thumb": "assets/img/miadop-listener/Yaguma-DSC_9533_t.webp",
     "w": 1067,
     "h": 1600
    },
@@ -309,6 +297,18 @@
     "thumb": "assets/img/miadop-listener/Yaguma-DSC_9554_t.webp",
     "w": 1600,
     "h": 1067
+   },
+   {
+    "src": "assets/img/miadop-listener/Peisuky-DSC_0419.webp",
+    "thumb": "assets/img/miadop-listener/Peisuky-DSC_0419_t.webp",
+    "w": 1067,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-listener/Peisuky-DSC_0404.webp",
+    "thumb": "assets/img/miadop-listener/Peisuky-DSC_0404_t.webp",
+    "w": 1067,
+    "h": 1600
    }
   ],
   "videos": [
