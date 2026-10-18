@@ -758,5 +758,25 @@
     "h": 1600
    }
   ]
+ },
+ "miadop-keychain": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-keychain/01.webp",
+    "thumb": "assets/img/miadop-keychain/01_t.webp",
+    "w": 691,
+    "h": 863
+   }
+  ]
+ },
+ "miadop-standee": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-standee/01.webp",
+    "thumb": "assets/img/miadop-standee/01_t.webp",
+    "w": 1280,
+    "h": 1600
+   }
+  ]
  }
 }

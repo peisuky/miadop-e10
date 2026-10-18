@@ -48,6 +48,8 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('miadop-dreamcatcher', 'miadop/dreamcatcher'),
     # 以下第三欄：只取檔名包含這段文字的檔案；第四欄 False = 不做置中裁切（書頁、明信片、情境照要完整呈現）
     ('miadop-grassbag', 'miadop/grassbag', '', False),
+    ('miadop-keychain', 'miadop/keychain'),     # 去背原稿：貼白底後照一般商品置中裁切
+    ('miadop-standee', 'miadop/standee'),
     ('kenku-book', 'kenku/book', '', False),
     ('kenku-postcard', 'kenku/postcard', '', False),
     ('kenku-standee/survival', 'kenku/standee', 'Survival Guide', True),

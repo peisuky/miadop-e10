@@ -12,8 +12,8 @@
         "en": "A label by Harcy × Kulas"
       },
       "blurb": {
-        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網與藥草包，都是巡獵部落行囊裡的東西。",
-        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher and an herb pouch — everything a hunting tribe packs for the road."
+        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網、藥草包，還有 Kulas 的壓克力吊飾與立牌，都是巡獵部落行囊裡的東西。",
+        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher, an herb pouch and Kulas acrylics — everything a hunting tribe packs for the road."
       },
       "members": [
         {
@@ -267,9 +267,69 @@
         "en": "A pouch of herbal scent carried on the hunt — keeps mosquitoes away and helps you rest at night, and calms a restless mind when you need it."
       },
       "specs": {
-        "zh": ["內容物：中草藥（驅蚊、安神、靜心散躁）"],
-        "en": ["Contents: Chinese herbs (repels mosquitoes, calming, eases restlessness)"]
+        "zh": [
+          "內容物：中草藥（驅蚊、安神、靜心散躁）"
+        ],
+        "en": [
+          "Contents: Chinese herbs (repels mosquitoes, calming, eases restlessness)"
+        ]
       }
+    },
+    {
+      "id": "miadop-keychain",
+      "brand": "miadop",
+      "kind": "acrylic",
+      "name": {
+        "zh": "Kulas 壓克力吊飾",
+        "en": "Kulas Acrylic Keychain"
+      },
+      "sub": {
+        "zh": "甩頭的 Kulas",
+        "en": "Kulas, mid head-shake"
+      },
+      "lore": {
+        "zh": "巡獵途中甩掉一身風沙的 Kulas，掛在行囊上跟著一路晃。",
+        "en": "Kulas shaking off the wasteland dust — hang him on your pack and let him swing along."
+      },
+      "specs": {
+        "zh": [
+          "壓克力",
+          "高 4cm"
+        ],
+        "en": [
+          "Acrylic",
+          "4 cm tall"
+        ]
+      },
+      "three": "assets/3d/miadop-keychain__kulas/shape.json"
+    },
+    {
+      "id": "miadop-standee",
+      "brand": "miadop",
+      "kind": "acrylic",
+      "name": {
+        "zh": "Kulas 壓克力立牌",
+        "en": "Kulas Acrylic Standee"
+      },
+      "sub": {
+        "zh": "坐著休息的 Kulas",
+        "en": "Kulas taking a seat"
+      },
+      "lore": {
+        "zh": "巡獵回來，在營火邊坐下歇腳的 Kulas，放在桌上陪你。",
+        "en": "Back from the hunt, Kulas sits down by the fire — and keeps you company on your desk."
+      },
+      "specs": {
+        "zh": [
+          "壓克力立牌（含底座）",
+          "高 4cm"
+        ],
+        "en": [
+          "Acrylic standee with base",
+          "4 cm tall"
+        ]
+      },
+      "three": "assets/3d/miadop-standee__kulas/shape.json"
     },
     {
       "id": "kenku-book",
