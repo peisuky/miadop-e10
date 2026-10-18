@@ -21,6 +21,7 @@ const STR = {
     'loc.title': '攤位位置', 'loc.sub': '展演A廳最上方的 E 排，左邊數來第 10 號。', 'loc.here': 'E10 在這裡', 'loc.full': '看完整會場地圖',
     'foot.copy': '所有作品著作權屬於各創作者：阿爾西、Kulas、Kenku、Peisuky、香酥雞白狗。', 'foot.ga': '本站使用 Google Analytics 統計瀏覽量。',
     roles: '巡獵部落的五種職分', rolesSub: '五款服裝，五種在荒土上活下去的方式',
+    dealBadge: '套組優惠', age18: '🔞 限 18 歲以上購買',
     pick: '選擇款式', pickCount: n => `共 ${n} 款，點圖切換`,
     see: '看這位的商品 →', tba: '價格待公布', from: '起', variants: n => `${n} 款`,
     on: '販售中', sold: '完售', soon: '即將公開', partial: '部分完售', soonCard: '即將公開',
@@ -44,6 +45,7 @@ const STR = {
     'loc.title': 'Booth Location', 'loc.sub': 'Top row E in Exhibition Hall A, 10th booth from the left.', 'loc.here': 'E10 is here', 'loc.full': 'Show the full floor map',
     'foot.copy': 'All artwork © their creators: Harcy, Kulas, Kenku, Peisuky and Whitedog.', 'foot.ga': 'This site uses Google Analytics to count visits.',
     roles: 'Five Roles of the Tribe', rolesSub: 'Five outfits, five ways to survive the wasteland',
+    dealBadge: 'Bundle deal', age18: '🔞 18+ only — adults may purchase',
     pick: 'Choose a style', pickCount: n => `${n} styles — tap to switch`,
     see: 'See their goods →', tba: 'Price TBA', from: '+', variants: n => `${n} styles`,
     on: 'Available', sold: 'Sold out', soon: 'Coming soon', partial: 'Some sold out', soonCard: 'Coming soon',
@@ -154,6 +156,8 @@ function card(p) {
   const has3d = p.three || p.variants?.some(v => v.three), hasVid = MEDIA[p.id]?.videos?.length;
   const badges = el('div', { class: 'badges' },
     p.isNew ? el('span', { class: 'badge new' }, t('new')) : null,
+    p.age === '18' ? el('span', { class: 'badge r18' }, 'R-18') : null,
+    p.deal ? el('span', { class: 'badge deal' }, t('dealBadge')) : null,
     has3d ? el('span', { class: 'badge d3' }, '3D') : null,
     hasVid ? el('span', { class: 'badge vid' }, '▶ VIDEO') : null);
   const ph = cover
@@ -271,6 +275,8 @@ function fillInfo() {
   const pr = $('#mPrice'); pr.replaceChildren(i.status === 'soon' ? '' : priceText(i.price));
   const st = $('#mStatus'); st.className = 'status ' + i.status; st.textContent = t(i.status);
   $('#mLore').textContent = L(p.lore);
+  $('#mDeal').hidden = !p.deal; $('#mDeal').replaceChildren(el('b', {}, t('dealBadge')), L(p.deal));
+  $('#mAge').hidden = (v?.age || p.age) !== '18'; $('#mAge').textContent = t('age18');
   const specs = [...(L(p.specs) || []), ...(v ? L(v.specs) || [] : [])];
   $('#mSpecs').replaceChildren(...specs.map(s => el('li', {}, s)));
   const note = i.note?.[lang] || i.note?.zh || ''; $('#mNote').hidden = !note; $('#mNote').textContent = note;
@@ -303,7 +309,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018j');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018k');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });

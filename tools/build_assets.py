@@ -46,9 +46,14 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('whitedog-explorer/peisuky', 'whitedog/explorer-standee/peisuky'),
     ('peisuky-taro-badge', 'peisuky/taro-badge'),
     ('miadop-dreamcatcher', 'miadop/dreamcatcher'),
-    ('miadop-grassbag', 'miadop/grassbag'),
-    ('kenku-book', 'kenku/book'),
-    ('kenku-standee', 'kenku/standee'),
+    # 以下第三欄：只取檔名包含這段文字的檔案；第四欄 False = 不做置中裁切（書頁、明信片、情境照要完整呈現）
+    ('miadop-grassbag', 'miadop/grassbag', '', False),
+    ('kenku-book', 'kenku/book', '', False),
+    ('kenku-postcard', 'kenku/postcard', '', False),
+    ('kenku-standee/survival', 'kenku/standee', 'Survival Guide', True),
+    ('kenku-standee/ken', 'kenku/standee', 'Ken與Fred', True),
+    ('kenku-standee/fred', 'kenku/standee', 'Ken與Fred', True),
+    ('kenku-standee/kenku', 'kenku/standee', 'Kenku雙面差分', True),
 ]
 IMG_EXT = ('.jpg', '.jpeg', '.png', '.webp', '.heic')
 COVERS = {   # 商品卡封面另外指定（沒指定就用第一款的第一張照片）
@@ -189,10 +194,12 @@ def build_photos(media, force):
         print(pid, len(items), 'photos')
 
     # 其他商品：資料夾裡全部照片，裁成商品置中的卡片比例（服裝照是情境照，不裁）
-    for key, rel in PHOTO_SETS:
+    for key, rel, *opt in PHOTO_SETS:
+        match, crop = (opt + ['', True])[:2] if opt else ('', True)
         d = os.path.join(SRC, rel)
-        files = sorted(os.path.join(d, x) for x in os.listdir(d) if x.lower().endswith(IMG_EXT)) if os.path.isdir(d) else []
-        items = [save_pair(card_crop(load(p)), os.path.join(ROOT, 'assets', 'img', key, f'{i + 1:02d}'), force) for i, p in enumerate(files)]
+        files = sorted(os.path.join(d, x) for x in os.listdir(d) if x.lower().endswith(IMG_EXT) and match in x) if os.path.isdir(d) else []
+        files.sort(key=lambda f: ('Back' in f, f))          # 雙面立牌：正面在前
+        items = [save_pair(card_crop(load(p)) if crop else load(p), os.path.join(ROOT, 'assets', 'img', key, f'{i + 1:02d}'), force) for i, p in enumerate(files)]
         media.setdefault(key, {})['photos'] = items
         print(key, len(items), 'photos')
 

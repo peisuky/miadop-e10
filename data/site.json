@@ -4,10 +4,11 @@
   "ga": "",
   "refreshSeconds": 120,
   "fallback": {
-    "@活動狀態": { "status": "活動前" },
-    "miadop-dreamcatcher": { "status": "即將公開" },
-    "miadop-grassbag": { "status": "即將公開" },
-    "kenku-book": { "status": "即將公開" },
-    "kenku-standee": { "status": "即將公開" }
+    "@活動狀態": {
+      "status": "活動前"
+    },
+    "miadop-dreamcatcher": {
+      "status": "即將公開"
+    }
   }
 }

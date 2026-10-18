@@ -169,6 +169,9 @@ html[lang="en"] .cut-title { font-family: var(--an); font-weight: 400; letter-sp
 .badge.new { background: var(--brick); }
 .badge.d3 { background: var(--sun); color: var(--ink); }
 .badge.vid { background: var(--mid); color: var(--ink); }
+.badge.r18 { background: #8f1d1d; }
+.badge.deal { background: var(--olive); color: var(--ink); font-family: var(--zh); font-weight: 900; }
+html[lang="en"] .badge.deal { font-family: var(--an); font-weight: 400; }
 .card h4 { margin: 10px 4px 0; font: 900 17px/1.3 var(--zh); letter-spacing: .04em; }
 .card .sub { margin: 0 4px; font-size: 13px; opacity: .7; }
 .card .meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin: 8px 4px 0; flex-wrap: wrap; }
@@ -296,6 +299,9 @@ html[lang="en"] .stamp b { font-family: var(--an); font-weight: 400; letter-spac
 .m-lore { margin: 14px 0 0; padding: 12px 14px; background: var(--cream); border-radius: 6px; font-size: 15.5px; font-weight: 500; border-left: 5px solid var(--kraft); }
 .m-specs { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
 .m-specs li { font-size: 13.5px; font-weight: 700; padding: 4px 10px; border-radius: 4px; background: #fff8e6; box-shadow: var(--sh1); }
+.m-age { margin: 12px 0 0; font-weight: 900; font-size: 14px; color: #8f1d1d; }
+.m-deal { margin: 12px 0 0; padding: 10px 12px; border-radius: 6px; background: #eef0d8; border: 2px solid var(--olive); font-size: 14.5px; font-weight: 700; line-height: 1.6; }
+.m-deal b { display: inline-block; margin-right: 8px; padding: 2px 8px; border-radius: 4px; background: var(--olive); font-size: 13px; }
 .m-note { margin: 12px 0 0; font-size: 14px; font-weight: 700; color: var(--ruin); }
 @media (min-width: 900px) {
   .modal { width: min(1080px, 94vw); height: min(720px, 90vh); margin: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }

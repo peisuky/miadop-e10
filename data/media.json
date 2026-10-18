@@ -629,10 +629,48 @@
   "photos": []
  },
  "miadop-grassbag": {
-  "photos": []
+  "photos": [
+   {
+    "src": "assets/img/miadop-grassbag/01.webp",
+    "thumb": "assets/img/miadop-grassbag/01_t.webp",
+    "w": 1108,
+    "h": 1477
+   },
+   {
+    "src": "assets/img/miadop-grassbag/02.webp",
+    "thumb": "assets/img/miadop-grassbag/02_t.webp",
+    "w": 1108,
+    "h": 1477
+   }
+  ]
  },
  "kenku-book": {
-  "photos": []
+  "photos": [
+   {
+    "src": "assets/img/kenku-book/01.webp",
+    "thumb": "assets/img/kenku-book/01_t.webp",
+    "w": 1280,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/kenku-book/02.webp",
+    "thumb": "assets/img/kenku-book/02_t.webp",
+    "w": 1221,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/kenku-book/03.webp",
+    "thumb": "assets/img/kenku-book/03_t.webp",
+    "w": 1600,
+    "h": 1061
+   },
+   {
+    "src": "assets/img/kenku-book/04.webp",
+    "thumb": "assets/img/kenku-book/04_t.webp",
+    "w": 1221,
+    "h": 1600
+   }
+  ]
  },
  "kenku-standee": {
   "photos": []
@@ -664,5 +702,61 @@
    "w": 1279,
    "h": 1600
   }
+ },
+ "kenku-postcard": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-postcard/01.webp",
+    "thumb": "assets/img/kenku-postcard/01_t.webp",
+    "w": 1600,
+    "h": 1200
+   }
+  ]
+ },
+ "kenku-standee/survival": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-standee/survival/01.webp",
+    "thumb": "assets/img/kenku-standee/survival/01_t.webp",
+    "w": 1280,
+    "h": 1600
+   }
+  ]
+ },
+ "kenku-standee/ken": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-standee/ken/01.webp",
+    "thumb": "assets/img/kenku-standee/ken/01_t.webp",
+    "w": 1279,
+    "h": 1600
+   }
+  ]
+ },
+ "kenku-standee/fred": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-standee/fred/01.webp",
+    "thumb": "assets/img/kenku-standee/fred/01_t.webp",
+    "w": 1279,
+    "h": 1600
+   }
+  ]
+ },
+ "kenku-standee/kenku": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-standee/kenku/01.webp",
+    "thumb": "assets/img/kenku-standee/kenku/01_t.webp",
+    "w": 1281,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/kenku-standee/kenku/02.webp",
+    "thumb": "assets/img/kenku-standee/kenku/02_t.webp",
+    "w": 1280,
+    "h": 1600
+   }
+  ]
  }
 }

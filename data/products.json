@@ -1,197 +1,668 @@
 {
-  "_說明": "商品與創作者的文字內容。價格、販售狀態不在這裡，在 Google 試算表（data/site.json 的 sheet）。照片、影片清單由 tools/build_assets.py 產生在 data/media.json。three：3D 模型資料夾（assets/3d/…/shape.json），沒有就留 null。",
+  "_說明": "商品與創作者的文字內容。價格、販售狀態不在這裡，在 Google 試算表（data/site.json 的 sheet）。照片、影片清單由 tools/build_assets.py 產生在 data/media.json。three：3D 模型資料夾（assets/3d/…/shape.json），沒有就留 null。 deal：套組優惠說明（商品視窗顯示、商品卡加「套組優惠」標籤）。age：'18' = 限 18 歲以上（可放在商品或款式上）。",
   "brands": [
     {
       "id": "miadop",
-      "name": { "zh": "Mi'adop", "en": "Mi'adop" },
-      "tagline": { "zh": "阿爾西 × Kulas 雙人品牌", "en": "A label by Harcy × Kulas" },
+      "name": {
+        "zh": "Mi'adop",
+        "en": "Mi'adop"
+      },
+      "tagline": {
+        "zh": "阿爾西 × Kulas 雙人品牌",
+        "en": "A label by Harcy × Kulas"
+      },
       "blurb": {
         "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網與草包，都是巡獵部落行囊裡的東西。",
         "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher and a grass bag — everything a hunting tribe packs for the road."
       },
       "members": [
-        { "name": { "zh": "阿爾西", "en": "Harcy" }, "avatar": "assets/brand/avatar-axi.webp", "links": [] },
-        { "name": { "zh": "Kulas", "en": "Kulas" }, "avatar": "assets/brand/avatar-gugu.webp", "links": [] }
+        {
+          "name": {
+            "zh": "阿爾西",
+            "en": "Harcy"
+          },
+          "avatar": "assets/brand/avatar-axi.webp",
+          "links": []
+        },
+        {
+          "name": {
+            "zh": "Kulas",
+            "en": "Kulas"
+          },
+          "avatar": "assets/brand/avatar-gugu.webp",
+          "links": []
+        }
       ],
       "logo": "assets/brand/logo-ink.png"
     },
     {
       "id": "kenku",
-      "name": { "zh": "Kenku", "en": "Kenku" },
-      "tagline": { "zh": "新刊《生存指難》", "en": "New book: Survival Guide (Not)" },
+      "name": {
+        "zh": "Kenku",
+        "en": "Kenku"
+      },
+      "tagline": {
+        "zh": "新刊《生存指難》",
+        "en": "New book: Survival Guide"
+      },
       "blurb": {
-        "zh": "帶著一本誰都看不懂的生存指南走進荒土。這次有新刊、角色吊飾與立牌。",
-        "en": "Walked into the wasteland with a survival guide nobody can follow. New book, character keychains and a standee this time."
+        "zh": "帶著一本誰都看不懂的生存指南走進荒土。這次有新刊、角色吊飾、立牌與明信片。",
+        "en": "Walked into the wasteland with a survival guide nobody can follow. New book, character keychains, standees and postcards this time."
       },
       "members": [
-        { "name": { "zh": "Kenku", "en": "Kenku" }, "avatar": "assets/brand/avatar-kenku.webp", "links": [] }
+        {
+          "name": {
+            "zh": "Kenku",
+            "en": "Kenku"
+          },
+          "avatar": "assets/brand/avatar-kenku.webp",
+          "links": []
+        }
       ]
     },
     {
       "id": "peisuky",
-      "name": { "zh": "Peisuky", "en": "Peisuky" },
-      "tagline": { "zh": "小芋牛的飼主", "en": "Keeper of the little taro bull" },
+      "name": {
+        "zh": "Peisuky",
+        "en": "Peisuky"
+      },
+      "tagline": {
+        "zh": "小芋牛的飼主",
+        "en": "Keeper of the little taro bull"
+      },
       "blurb": {
         "zh": "荒土上最療癒的小芋牛，這次變成了閃亮亮的琺瑯徽章。",
         "en": "The comfiest little taro bull in the wasteland, now as a shiny enamel pin."
       },
       "members": [
-        { "name": { "zh": "Peisuky", "en": "Peisuky" }, "avatar": "assets/brand/avatar-pei.webp", "links": [] }
+        {
+          "name": {
+            "zh": "Peisuky",
+            "en": "Peisuky"
+          },
+          "avatar": "assets/brand/avatar-pei.webp",
+          "links": []
+        }
       ]
     },
     {
       "id": "whitedog",
-      "name": { "zh": "香酥雞白狗", "en": "Whitedog" },
-      "tagline": { "zh": "邀狗飯友・探險小隊", "en": "Dinner Pals · Expedition Squad" },
+      "name": {
+        "zh": "香酥雞白狗",
+        "en": "Whitedog"
+      },
+      "tagline": {
+        "zh": "邀狗飯友・探險小隊",
+        "en": "Dinner Pals · Expedition Squad"
+      },
       "blurb": {
         "zh": "畫狗，也畫一起吃飯、一起冒險的朋友們。兩個系列的壓克力立牌，收集全員吧。",
         "en": "Drawing dogs, and the friends who eat and adventure with them. Two acrylic standee series — collect the whole crew."
       },
       "members": [
-        { "name": { "zh": "香酥雞白狗", "en": "Whitedog" }, "avatar": "assets/brand/avatar-baigou.webp", "links": [] }
+        {
+          "name": {
+            "zh": "香酥雞白狗",
+            "en": "Whitedog"
+          },
+          "avatar": "assets/brand/avatar-baigou.webp",
+          "links": []
+        }
       ]
     }
   ],
   "products": [
     {
-      "id": "miadop-nightwatch", "brand": "miadop", "kind": "outfit",
-      "name": { "zh": "儆夜者", "en": "Nightwatch" },
-      "sub": { "zh": "圍巾後背披風款", "en": "Scarf & Back Cape" },
+      "id": "miadop-nightwatch",
+      "brand": "miadop",
+      "kind": "outfit",
+      "name": {
+        "zh": "儆夜者",
+        "en": "Nightwatch"
+      },
+      "sub": {
+        "zh": "圍巾後背披風款",
+        "en": "Scarf & Back Cape"
+      },
       "lore": {
         "zh": "長夜裡守著營火的人。披風擋住荒土的冷風，圍巾記得回部落的方向。",
         "en": "The one who keeps the fire through the long night. The cape blocks the wasteland chill; the scarf remembers the way home."
       },
-      "specs": { "zh": ["不分尺寸"], "en": ["One size"] }
+      "specs": {
+        "zh": [
+          "不分尺寸"
+        ],
+        "en": [
+          "One size"
+        ]
+      }
     },
     {
-      "id": "miadop-watcher", "brand": "miadop", "kind": "outfit",
-      "name": { "zh": "守望者", "en": "Watcher" },
-      "sub": { "zh": "背心款", "en": "Vest" },
+      "id": "miadop-watcher",
+      "brand": "miadop",
+      "kind": "outfit",
+      "name": {
+        "zh": "守望者",
+        "en": "Watcher"
+      },
+      "sub": {
+        "zh": "背心款",
+        "en": "Vest"
+      },
       "lore": {
         "zh": "站在最高的廢墟上，替部落看著遠方。輕便的背心，讓雙手隨時能拉開弓。",
         "en": "Perched on the highest ruin, eyes on the horizon for the tribe. A light vest that keeps both arms free for the bow."
       },
-      "specs": { "zh": ["不分尺寸"], "en": ["One size"] }
+      "specs": {
+        "zh": [
+          "不分尺寸"
+        ],
+        "en": [
+          "One size"
+        ]
+      }
     },
     {
-      "id": "miadop-herder", "brand": "miadop", "kind": "outfit",
-      "name": { "zh": "巡牧者", "en": "Wayfarer" },
-      "sub": { "zh": "大斗篷款", "en": "Grand Cloak" },
+      "id": "miadop-herder",
+      "brand": "miadop",
+      "kind": "outfit",
+      "name": {
+        "zh": "巡牧者",
+        "en": "Wayfarer"
+      },
+      "sub": {
+        "zh": "大斗篷款",
+        "en": "Grand Cloak"
+      },
       "lore": {
         "zh": "帶著獸群穿越荒原的旅人。厚實的大斗篷是帳篷，也是部落的旗幟。",
         "en": "Leads the herds across the barrens. The great cloak is both tent and tribal banner."
       },
-      "specs": { "zh": ["不分尺寸"], "en": ["One size"] }
+      "specs": {
+        "zh": [
+          "不分尺寸"
+        ],
+        "en": [
+          "One size"
+        ]
+      }
     },
     {
-      "id": "miadop-seer", "brand": "miadop", "kind": "outfit",
-      "name": { "zh": "洞見者", "en": "Seer" },
-      "sub": { "zh": "短斗篷款", "en": "Short Cape" },
+      "id": "miadop-seer",
+      "brand": "miadop",
+      "kind": "outfit",
+      "name": {
+        "zh": "洞見者",
+        "en": "Seer"
+      },
+      "sub": {
+        "zh": "短斗篷款",
+        "en": "Short Cape"
+      },
       "lore": {
         "zh": "讀得懂星象，也讀得懂足跡。短斗篷俐落，不會擋住看向遠方的視線。",
         "en": "Reads the stars and the tracks alike. A short cape that never blocks the view ahead."
       },
-      "specs": { "zh": ["不分尺寸"], "en": ["One size"] }
+      "specs": {
+        "zh": [
+          "不分尺寸"
+        ],
+        "en": [
+          "One size"
+        ]
+      }
     },
     {
-      "id": "miadop-listener", "brand": "miadop", "kind": "outfit",
-      "name": { "zh": "聽風者", "en": "Windlistener" },
-      "sub": { "zh": "圍巾款", "en": "Scarf" },
+      "id": "miadop-listener",
+      "brand": "miadop",
+      "kind": "outfit",
+      "name": {
+        "zh": "聽風者",
+        "en": "Windlistener"
+      },
+      "sub": {
+        "zh": "圍巾款",
+        "en": "Scarf"
+      },
       "lore": {
         "zh": "風會帶來消息，而他總是第一個聽見。一條圍巾，就是部落的信物。",
         "en": "The wind carries news, and he always hears it first. One scarf, the token of the tribe."
       },
-      "specs": { "zh": ["不分尺寸"], "en": ["One size"] }
+      "specs": {
+        "zh": [
+          "不分尺寸"
+        ],
+        "en": [
+          "One size"
+        ]
+      }
     },
     {
-      "id": "miadop-dreamcatcher", "brand": "miadop", "kind": "goods",
-      "name": { "zh": "捕夢網", "en": "Dreamcatcher" },
+      "id": "miadop-dreamcatcher",
+      "brand": "miadop",
+      "kind": "goods",
+      "name": {
+        "zh": "捕夢網",
+        "en": "Dreamcatcher"
+      },
       "lore": {
         "zh": "掛在帳篷門口，把荒土的噩夢擋在外面。",
         "en": "Hung at the tent flap to keep the wasteland's nightmares out."
       },
-      "specs": { "zh": [], "en": [] }
+      "specs": {
+        "zh": [],
+        "en": []
+      }
     },
     {
-      "id": "miadop-grassbag", "brand": "miadop", "kind": "goods",
-      "name": { "zh": "ㄍㄧㄡˇ草包", "en": "Giǔ Grass Bag" },
+      "id": "miadop-grassbag",
+      "brand": "miadop",
+      "kind": "goods",
+      "name": {
+        "zh": "ㄍㄧㄡˇ草包",
+        "en": "Giǔ Grass Bag"
+      },
       "lore": {
         "zh": "裝得下乾糧、藥草，還有一路上撿到的寶物。",
         "en": "Room for rations, herbs and every treasure picked up along the way."
       },
-      "specs": { "zh": [], "en": [] }
+      "specs": {
+        "zh": [],
+        "en": []
+      }
     },
     {
-      "id": "kenku-book", "brand": "kenku", "kind": "book", "isNew": true,
-      "name": { "zh": "生存指難", "en": "Survival Guide (Not)" },
-      "sub": { "zh": "新刊", "en": "New book" },
+      "id": "kenku-book",
+      "brand": "kenku",
+      "kind": "book",
+      "isNew": true,
+      "name": {
+        "zh": "生存指難",
+        "en": "Survival Guide"
+      },
+      "sub": {
+        "zh": "新刊・附試閱",
+        "en": "New book · with preview pages"
+      },
       "lore": {
         "zh": "末日來了，指南卻寫得比末日還難懂。",
         "en": "The end of the world arrived — and the guidebook turned out harder than the apocalypse."
       },
-      "specs": { "zh": [], "en": [] }
+      "specs": {
+        "zh": [
+          "A5",
+          "32 頁",
+          "全彩",
+          "騎馬釘",
+          "封面：雪銅亮膜",
+          "R-18"
+        ],
+        "en": [
+          "A5",
+          "32 pages",
+          "Full colour",
+          "Saddle-stitched",
+          "Glossy laminated cover",
+          "R-18"
+        ]
+      },
+      "age": "18",
+      "deal": {
+        "zh": "《生存指難》套組：漫畫 1 本＋《生存指難》15cm 立牌 1 個，兩件合計再折 NT$100",
+        "en": "Survival Guide bundle: comic book + 15 cm Survival Guide standee — NT$100 off the combined price"
+      }
     },
     {
-      "id": "kenku-keychain", "brand": "kenku", "kind": "acrylic",
-      "name": { "zh": "角色吊飾", "en": "Character Keychain" },
+      "id": "kenku-keychain",
+      "brand": "kenku",
+      "kind": "acrylic",
+      "name": {
+        "zh": "角色吊飾",
+        "en": "Character Keychain"
+      },
       "lore": {
         "zh": "掛在背包上的旅伴，走到哪晃到哪。",
         "en": "Travel buddies that swing along on your pack."
       },
-      "specs": { "zh": ["壓克力", "厚 0.5cm"], "en": ["Acrylic", "5 mm thick"] },
+      "specs": {
+        "zh": [
+          "雙面壓克力",
+          "厚 0.5cm"
+        ],
+        "en": [
+          "Double-sided acrylic",
+          "5 mm thick"
+        ]
+      },
       "variants": [
-        { "id": "ken", "name": { "zh": "Ken", "en": "Ken" }, "three": "assets/3d/kenku-keychain__ken/shape.json", "specs": { "zh": ["高 5cm"], "en": ["5 cm tall"] } },
-        { "id": "fread", "name": { "zh": "Fread", "en": "Fread" }, "three": "assets/3d/kenku-keychain__fread/shape.json", "specs": { "zh": ["高 7cm"], "en": ["7 cm tall"] } }
+        {
+          "id": "ken",
+          "name": {
+            "zh": "Ken",
+            "en": "Ken"
+          },
+          "three": "assets/3d/kenku-keychain__ken/shape.json",
+          "specs": {
+            "zh": [
+              "高 5cm"
+            ],
+            "en": [
+              "5 cm tall"
+            ]
+          }
+        },
+        {
+          "id": "fread",
+          "name": {
+            "zh": "Fread",
+            "en": "Fread"
+          },
+          "three": "assets/3d/kenku-keychain__fread/shape.json",
+          "specs": {
+            "zh": [
+              "高 7cm"
+            ],
+            "en": [
+              "7 cm tall"
+            ]
+          }
+        }
+      ],
+      "sub": {
+        "zh": "Ken 與 Fread 雙面壓克力鑰匙圈",
+        "en": "Ken & Fread double-sided acrylic keychains"
+      },
+      "deal": {
+        "zh": "Ken＋Fread 兩款一起買，合計再折 NT$50",
+        "en": "Buy Ken + Fread together — NT$50 off the combined price"
+      }
+    },
+    {
+      "id": "kenku-standee",
+      "brand": "kenku",
+      "kind": "acrylic",
+      "name": {
+        "zh": "角色立牌",
+        "en": "Character Standees"
+      },
+      "lore": {
+        "zh": "在桌上替你站崗的生存者們。雙面印刷，轉過來還有另一面。",
+        "en": "Survivors standing guard on your desk. Printed on both sides — turn them around for a second look."
+      },
+      "specs": {
+        "zh": [
+          "雙面印刷壓克力"
+        ],
+        "en": [
+          "Double-sided printed acrylic"
+        ]
+      },
+      "sub": {
+        "zh": "雙面壓克力立牌",
+        "en": "Double-sided acrylic standees"
+      },
+      "deal": {
+        "zh": "Ken＋Fred 立牌兩款一起買，合計再折 NT$50；《生存指難》立牌可和新刊組成套組再折 NT$100",
+        "en": "Ken + Fred standees together — NT$50 off; the Survival Guide standee bundles with the new book for NT$100 off"
+      },
+      "variants": [
+        {
+          "id": "survival",
+          "name": {
+            "zh": "《生存指難》",
+            "en": "Survival Guide"
+          },
+          "specs": {
+            "zh": [
+              "高 15cm"
+            ],
+            "en": [
+              "15 cm tall"
+            ]
+          }
+        },
+        {
+          "id": "ken",
+          "name": {
+            "zh": "Ken",
+            "en": "Ken"
+          },
+          "age": "18",
+          "specs": {
+            "zh": [
+              "高 5cm",
+              "18+"
+            ],
+            "en": [
+              "5 cm tall",
+              "18+"
+            ]
+          }
+        },
+        {
+          "id": "fred",
+          "name": {
+            "zh": "Fred",
+            "en": "Fred"
+          },
+          "age": "18",
+          "specs": {
+            "zh": [
+              "高 8cm",
+              "18+"
+            ],
+            "en": [
+              "8 cm tall",
+              "18+"
+            ]
+          }
+        },
+        {
+          "id": "kenku",
+          "name": {
+            "zh": "Kenku 雙面差分",
+            "en": "Kenku two-faced"
+          },
+          "specs": {
+            "zh": [
+              "高 10cm",
+              "正反面不同造型"
+            ],
+            "en": [
+              "10 cm tall",
+              "Different outfit on each side"
+            ]
+          }
+        }
       ]
     },
     {
-      "id": "kenku-standee", "brand": "kenku", "kind": "acrylic",
-      "name": { "zh": "角色立牌", "en": "Character Standee" },
-      "lore": {
-        "zh": "在桌上替你站崗的小小生存者。",
-        "en": "A tiny survivor standing guard on your desk."
+      "id": "kenku-postcard",
+      "brand": "kenku",
+      "kind": "goods",
+      "name": {
+        "zh": "日常生活明信片",
+        "en": "Everyday Life Postcards"
       },
-      "specs": { "zh": ["壓克力"], "en": ["Acrylic"] }
+      "sub": {
+        "zh": "掃 QR code 可看全圖",
+        "en": "Scan the QR code for the full picture"
+      },
+      "lore": {
+        "zh": "末日前的日常片段，寄給還在荒土上的朋友。",
+        "en": "Snapshots of everyday life before the end, to send to friends still out in the wasteland."
+      },
+      "specs": {
+        "zh": [
+          "4 × 5 吋（10.16 × 12.7 cm）",
+          "QR code 可看全圖",
+          "僅以套組販售"
+        ],
+        "en": [
+          "4 × 5 in (10.16 × 12.7 cm)",
+          "QR code links to the full image",
+          "Sold as a set only"
+        ]
+      }
     },
     {
-      "id": "peisuky-taro-badge", "brand": "peisuky", "kind": "badge",
-      "name": { "zh": "小芋牛徽章", "en": "Little Taro Bull Pin" },
+      "id": "peisuky-taro-badge",
+      "brand": "peisuky",
+      "kind": "badge",
+      "name": {
+        "zh": "小芋牛徽章",
+        "en": "Little Taro Bull Pin"
+      },
       "lore": {
         "zh": "別在披風上當作幸運符，荒土再冷也有一點紫色的溫暖。",
         "en": "Pin it on your cape for luck — a little purple warmth, however cold the wasteland gets."
       },
       "three": "assets/3d/peisuky-taro-badge/shape.json",
-      "specs": { "zh": ["3 × 3cm", "金屬琺瑯", "背面鎖扣別針"], "en": ["3 × 3 cm", "Enamel on metal", "Locking pin back"] }
+      "specs": {
+        "zh": [
+          "3 × 3cm",
+          "金屬琺瑯",
+          "背面鎖扣別針"
+        ],
+        "en": [
+          "3 × 3 cm",
+          "Enamel on metal",
+          "Locking pin back"
+        ]
+      }
     },
     {
-      "id": "whitedog-dinner", "brand": "whitedog", "kind": "acrylic",
-      "name": { "zh": "邀狗飯友", "en": "Dinner Pals" },
-      "sub": { "zh": "厚磚壓克力立牌", "en": "Chunky acrylic block" },
+      "id": "whitedog-dinner",
+      "brand": "whitedog",
+      "kind": "acrylic",
+      "name": {
+        "zh": "邀狗飯友",
+        "en": "Dinner Pals"
+      },
+      "sub": {
+        "zh": "厚磚壓克力立牌",
+        "en": "Chunky acrylic block"
+      },
       "lore": {
         "zh": "營火邊一起吃飯的夥伴。厚實的壓克力磚，放在桌上剛剛好。",
         "en": "Pals to share a meal by the campfire. A chunky acrylic block that sits just right on your desk."
       },
-      "specs": { "zh": ["壓克力"], "en": ["Acrylic"] },
+      "specs": {
+        "zh": [
+          "壓克力"
+        ],
+        "en": [
+          "Acrylic"
+        ]
+      },
       "variants": [
-        { "id": "whitedog", "name": { "zh": "白狗", "en": "Whitedog" }, "three": "assets/3d/whitedog-dinner__whitedog/shape.json", "specs": { "zh": ["高 4cm", "厚 0.8cm"], "en": ["4 cm tall", "8 mm thick"] } },
-        { "id": "che", "name": { "zh": "紅狗(超扯扯)", "en": "Red Dog (超扯扯)" }, "three": "assets/3d/whitedog-dinner__che/shape.json" },
-        { "id": "peisuky", "name": { "zh": "棕狗(Peisuky)", "en": "Brown Dog (Peisuky)" }, "three": "assets/3d/whitedog-dinner__peisuky/shape.json" }
+        {
+          "id": "whitedog",
+          "name": {
+            "zh": "白狗",
+            "en": "Whitedog"
+          },
+          "three": "assets/3d/whitedog-dinner__whitedog/shape.json",
+          "specs": {
+            "zh": [
+              "高 4cm",
+              "厚 0.8cm"
+            ],
+            "en": [
+              "4 cm tall",
+              "8 mm thick"
+            ]
+          }
+        },
+        {
+          "id": "che",
+          "name": {
+            "zh": "紅狗(超扯扯)",
+            "en": "Red Dog (超扯扯)"
+          },
+          "three": "assets/3d/whitedog-dinner__che/shape.json"
+        },
+        {
+          "id": "peisuky",
+          "name": {
+            "zh": "棕狗(Peisuky)",
+            "en": "Brown Dog (Peisuky)"
+          },
+          "three": "assets/3d/whitedog-dinner__peisuky/shape.json"
+        }
       ]
     },
     {
-      "id": "whitedog-explorer", "brand": "whitedog", "kind": "acrylic",
-      "name": { "zh": "探險小隊", "en": "Expedition Squad" },
-      "sub": { "zh": "壓克力立牌", "en": "Acrylic standee" },
+      "id": "whitedog-explorer",
+      "brand": "whitedog",
+      "kind": "acrylic",
+      "name": {
+        "zh": "探險小隊",
+        "en": "Expedition Squad"
+      },
+      "sub": {
+        "zh": "壓克力立牌",
+        "en": "Acrylic standee"
+      },
       "lore": {
         "zh": "整裝出發的探險小隊。每位隊員都有自己的裝備，收集全隊一起出發吧。",
         "en": "The expedition squad, geared up and ready. Every member packs their own kit — collect the whole team."
       },
-      "specs": { "zh": ["壓克力", "附圓形底座"], "en": ["Acrylic", "Round base"] },
+      "specs": {
+        "zh": [
+          "壓克力",
+          "附圓形底座"
+        ],
+        "en": [
+          "Acrylic",
+          "Round base"
+        ]
+      },
       "variants": [
-        { "id": "whitedog", "name": { "zh": "白狗", "en": "Whitedog" }, "three": "assets/3d/whitedog-explorer__whitedog/shape.json", "specs": { "zh": ["高 8cm、寬 5.3cm", "厚 0.5cm", "底座直徑 4.5cm"], "en": ["8 × 5.3 cm", "5 mm thick", "4.5 cm base"] } },
-        { "id": "harcy", "name": { "zh": "阿爾西", "en": "Harcy" }, "three": "assets/3d/whitedog-explorer__harcy/shape.json" },
-        { "id": "kulas", "name": { "zh": "Kulas", "en": "Kulas" }, "three": "assets/3d/whitedog-explorer__kulas/shape.json" },
-        { "id": "peisuky", "name": { "zh": "Peisuky", "en": "Peisuky" }, "three": "assets/3d/whitedog-explorer__peisuky/shape.json" }
+        {
+          "id": "whitedog",
+          "name": {
+            "zh": "白狗",
+            "en": "Whitedog"
+          },
+          "three": "assets/3d/whitedog-explorer__whitedog/shape.json",
+          "specs": {
+            "zh": [
+              "高 8cm、寬 5.3cm",
+              "厚 0.5cm",
+              "底座直徑 4.5cm"
+            ],
+            "en": [
+              "8 × 5.3 cm",
+              "5 mm thick",
+              "4.5 cm base"
+            ]
+          }
+        },
+        {
+          "id": "harcy",
+          "name": {
+            "zh": "阿爾西",
+            "en": "Harcy"
+          },
+          "three": "assets/3d/whitedog-explorer__harcy/shape.json"
+        },
+        {
+          "id": "kulas",
+          "name": {
+            "zh": "Kulas",
+            "en": "Kulas"
+          },
+          "three": "assets/3d/whitedog-explorer__kulas/shape.json"
+        },
+        {
+          "id": "peisuky",
+          "name": {
+            "zh": "Peisuky",
+            "en": "Peisuky"
+          },
+          "three": "assets/3d/whitedog-explorer__peisuky/shape.json"
+        }
       ]
     }
   ]
