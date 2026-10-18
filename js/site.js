@@ -307,23 +307,32 @@ async function showItem(k) {
   const stage = $('#mStage'), it = cur.items[k];
   disposeViewer(); stopMedia(); stage.classList.remove('three');
   if (!it) { stage.append(el('div', { class: 'soon-big' }, t('soonCard'))); return; }
-  if (it.type === 'img') stage.append(el('img', { src: it.src, alt: L(cur.p.name), width: it.w, height: it.h }));
-  else if (it.type === 'video') stage.append(el('video', { src: it.src, poster: it.poster, autoplay: true, muted: true, loop: true, playsinline: true, controls: true }));
-  else {
+  // 讀取中：展示區正中間轉圈，圖片／影片／3D 讀好就拿掉
+  const spin = el('div', { class: 'spin', role: 'status' }, el('i', {}), el('span', {}, t('loading')));
+  const done = () => spin.remove();
+  if (it.type === 'img') {
+    const img = el('img', { src: it.src, alt: L(cur.p.name), width: it.w, height: it.h });
+    img.addEventListener('load', done); img.addEventListener('error', done);
+    stage.append(img, spin);
+    if (img.complete && img.naturalWidth) done();
+  } else if (it.type === 'video') {
+    const vid = el('video', { src: it.src, poster: it.poster, autoplay: true, muted: true, loop: true, playsinline: true, controls: true });
+    vid.addEventListener('loadeddata', done); vid.addEventListener('error', done);
+    stage.append(vid, spin);
+  } else {
     stage.classList.add('three');
-    stage.append(el('span', { class: 'loading' }, t('loading')));
+    stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018n');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018o');
       if (seq !== viewerSeq) return;
-      stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }
-      viewer = vw;
+      viewer = vw; done();
       const spec = await (await fetch(it.src)).json();
       const key = spec.type === 'keychain' ? 'hintHold' : 'hint3d';
       stage.append(el('span', { class: 'hint', 'data-hint': key }, t(key)));
-    } catch (e) { console.error(e); stage.replaceChildren(el('div', { class: 'soon-big' }, '3D ✕')); }
+    } catch (e) { console.error(e); if (seq === viewerSeq) stage.replaceChildren(el('div', { class: 'soon-big' }, '3D ✕')); }
   }
   stage.querySelector('video')?.play?.().catch(() => {});
 }
