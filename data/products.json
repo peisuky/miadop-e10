@@ -12,8 +12,8 @@
         "en": "A label by Harcy × Kulas"
       },
       "blurb": {
-        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網與草包，都是巡獵部落行囊裡的東西。",
-        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher and a grass bag — everything a hunting tribe packs for the road."
+        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網與藥草包，都是巡獵部落行囊裡的東西。",
+        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher and an herb pouch — everything a hunting tribe packs for the road."
       },
       "members": [
         {
@@ -259,16 +259,16 @@
       "brand": "miadop",
       "kind": "goods",
       "name": {
-        "zh": "ㄍㄧㄡˇ草包",
-        "en": "Giǔ Grass Bag"
+        "zh": "藥草包",
+        "en": "Herb Pouch"
       },
       "lore": {
-        "zh": "裝得下乾糧、藥草，還有一路上撿到的寶物。",
-        "en": "Room for rations, herbs and every treasure picked up along the way."
+        "zh": "巡獵路上隨身帶著的一包草藥香，夜裡驅蚊安神，心浮氣躁時聞一聞，靜下心來。",
+        "en": "A pouch of herbal scent carried on the hunt — keeps mosquitoes away and helps you rest at night, and calms a restless mind when you need it."
       },
       "specs": {
-        "zh": [],
-        "en": []
+        "zh": ["內容物：中草藥（驅蚊、安神、靜心散躁）"],
+        "en": ["Contents: Chinese herbs (repels mosquitoes, calming, eases restlessness)"]
       }
     },
     {
