@@ -21,6 +21,7 @@ const STR = {
     'loc.title': '攤位位置', 'loc.sub': '展演A廳最上方的 E 排，左邊數來第 10 號。', 'loc.here': 'E10 在這裡', 'loc.full': '看完整會場地圖',
     'foot.copy': '所有作品著作權屬於各創作者：阿爾西、Kulas、Kenku、Peisuky、香酥雞白狗。', 'foot.ga': '本站使用 Google Analytics 統計瀏覽量。',
     roles: '巡獵部落的五種職分', rolesSub: '五款服裝，五種在荒土上活下去的方式',
+    pick: '選擇款式', pickCount: n => `共 ${n} 款，點圖切換`,
     see: '看這位的商品 →', tba: '價格待公布', from: '起', variants: n => `${n} 款`,
     on: '販售中', sold: '完售', soon: '即將公開', partial: '部分完售', soonCard: '即將公開',
     hint3d: '拖曳旋轉・雙指縮放', hintHold: '拖曳甩甩看・上下拖可以前後晃', loading: '載入中…', close: '關閉',
@@ -43,6 +44,7 @@ const STR = {
     'loc.title': 'Booth Location', 'loc.sub': 'Top row E in Exhibition Hall A, 10th booth from the left.', 'loc.here': 'E10 is here', 'loc.full': 'Show the full floor map',
     'foot.copy': 'All artwork © their creators: Harcy, Kulas, Kenku, Peisuky and Whitedog.', 'foot.ga': 'This site uses Google Analytics to count visits.',
     roles: 'Five Roles of the Tribe', rolesSub: 'Five outfits, five ways to survive the wasteland',
+    pick: 'Choose a style', pickCount: n => `${n} styles — tap to switch`,
     see: 'See their goods →', tba: 'Price TBA', from: '+', variants: n => `${n} styles`,
     on: 'Available', sold: 'Sold out', soon: 'Coming soon', partial: 'Some sold out', soonCard: 'Coming soon',
     hint3d: 'Drag to rotate · pinch to zoom', hintHold: 'Drag to swing it · drag up/down to tilt', loading: 'Loading…', close: 'Close',
@@ -245,11 +247,26 @@ function fillInfo() {
   $('#mBrand').textContent = `${t('by')} ・ ${L(b.name)}`;
   $('#mName').textContent = L(p.name);
   $('#mSub').textContent = [L(p.sub), v ? L(v.name) : ''].filter(Boolean).join(' ・ ');
+  // 款式選擇：標題寫明「選擇款式・共 N 款」，每款一張有縮圖的卡，選中的有紅框和勾勾
   const vb = $('#mVariants'); vb.replaceChildren();
-  for (const x of p.variants || []) {
-    const sold = info(`${p.id}/${x.id}`).status === 'sold';
-    vb.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(x === v), class: sold ? 'sold' : null,
-      onclick: () => { cur.v = x; cur.idx = 0; fillModal(); history.replaceState({ modal: true }, '', `#p=${p.id}/${x.id}`); } }, L(x.name)));
+  if (p.variants?.length) {
+    const k = p.variants.indexOf(v) + 1;
+    vb.append(el('p', { class: 'v-head' },
+      el('b', {}, t('pick')), el('span', {}, t('pickCount', p.variants.length)), el('em', {}, `${k} / ${p.variants.length}`)));
+    const row = el('div', { class: 'v-row', role: 'radiogroup', 'aria-label': t('pick') });
+    for (const x of p.variants) {
+      const sold = info(`${p.id}/${x.id}`).status === 'sold', ph = mediaOf(p, x).photos?.[0];
+      row.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(x === v), class: 'v-card' + (sold ? ' sold' : ''),
+        onclick: () => {
+          if (x === cur.v) return;
+          cur.v = x; cur.idx = 0; fillModal(); history.replaceState(history.state, '', `#p=${p.id}/${x.id}`);
+          // 手機上款式區在畫面下方：切換後捲回上面，讓人看到換成哪一款
+          if ($('#mStage').getBoundingClientRect().bottom < 80) modal.scrollTo({ top: 0, behavior: 'smooth' });
+        } },
+        el('span', { class: 'v-img' }, ph ? el('img', { src: ph.thumb, alt: '', loading: 'lazy' }) : null, sold ? el('i', {}, t('sold')) : null),
+        el('span', { class: 'v-name' }, L(x.name))));
+    }
+    vb.append(row);
   }
   const pr = $('#mPrice'); pr.replaceChildren(i.status === 'soon' ? '' : priceText(i.price));
   const st = $('#mStatus'); st.className = 'status ' + i.status; st.textContent = t(i.status);
@@ -286,7 +303,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018e');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018g');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });

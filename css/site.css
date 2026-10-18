@@ -255,11 +255,32 @@ html[lang="en"] .stamp b { font-family: var(--an); font-weight: 400; letter-spac
 .m-brand { margin: 0; font: 13px/1.3 var(--mo); letter-spacing: .12em; color: var(--ruin); }
 .modal-info h3 { margin: 4px 0 0; font: 900 28px/1.2 var(--zh); letter-spacing: .06em; }
 .m-sub { margin: 0; font-weight: 700; opacity: .7; }
-.variants { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+/* 款式選擇：有標題、有縮圖的卡片，一看就知道可以點來切換 */
+.variants { margin: 14px 0 0; padding: 12px; background: var(--cream); border-radius: 8px; border: 2px dashed rgba(28, 27, 24, .25); }
 .variants:empty { display: none; }
-.variants button { border: 2px solid var(--ink); background: none; border-radius: 999px; padding: 6px 14px; font: 700 14px/1 var(--zh); cursor: pointer; color: var(--ink); }
-.variants button[aria-checked="true"] { background: var(--ink); color: var(--paper); }
-.variants button.sold { text-decoration: line-through; opacity: .6; }
+.v-head { display: flex; align-items: baseline; gap: 8px; margin: 0 0 10px; flex-wrap: wrap; }
+.v-head b { font: 900 16px/1.2 var(--zh); background: var(--ink); color: var(--paper); padding: 4px 10px; border-radius: 4px; letter-spacing: .08em; }
+.v-head span { font-size: 13.5px; font-weight: 700; opacity: .75; }
+.v-head em { margin-left: auto; font: normal 400 16px/1 var(--an); letter-spacing: .06em; }
+.v-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 10px; }
+.v-card {
+  position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 5px 5px 8px; cursor: pointer;
+  background: var(--paper); border: 3px solid transparent; border-radius: 8px; box-shadow: var(--sh1); color: var(--ink);
+  transition: transform .12s, box-shadow .12s, border-color .12s;
+}
+.v-card:hover { transform: translateY(-2px); box-shadow: var(--sh2); border-color: rgba(196, 85, 58, .45); }
+.v-card[aria-checked="true"] { border-color: var(--brick); background: #fff8e6; box-shadow: var(--sh2); }
+.v-card[aria-checked="true"]::after {   /* 勾勾 */
+  content: '✓'; position: absolute; top: -9px; right: -9px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--brick); color: var(--paper); font: 900 14px/24px var(--zh); text-align: center; box-shadow: var(--sh1);
+}
+.v-img { position: relative; display: block; aspect-ratio: 1; border-radius: 5px; overflow: hidden; background: #efe3c4; }
+.v-img img { width: 100%; height: 100%; object-fit: cover; }
+.v-img i { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(246, 238, 216, .7); font: normal 900 13px/1 var(--zh); color: var(--brick); }
+.v-name { font: 900 14px/1.2 var(--zh); text-align: center; }
+.v-card[aria-checked="true"] .v-name { color: var(--brick); }
+.v-card.sold .v-name { text-decoration: line-through; opacity: .6; }
+@media (min-width: 900px) { .v-row { grid-template-columns: repeat(auto-fill, minmax(92px, 112px)); } }
 .m-price { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; }
 .m-price .price { font-size: 26px; }
 .m-lore { margin: 14px 0 0; padding: 12px 14px; background: var(--cream); border-radius: 6px; font-size: 15.5px; font-weight: 500; border-left: 5px solid var(--kraft); }
