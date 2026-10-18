@@ -185,17 +185,17 @@ async function buildAcrylic(spec, { env, renderer, dir }) {
     group.add(m);
     return m;
   };
-  if (spec.printBack || spec.backSame) {
-    // 雙面印刷：正反面各一張，各自只朝外。背面那張轉 180°，從背面看是正的（不是鏡像）。
-    // printBack：背面另一張圖（檔案本身就是「從背面看」的方向）；backSame：背面印同一張
-    const backTex = spec.printBack ? await loadTexture(dir + spec.printBack, renderer) : tex;
-    if (spec.printBack) textures.push(backTex);
+  if (spec.printBack) {
+    // 雙面不同圖：正反面各一張，各自只朝外。背面那張轉 180°，檔案本身就是「從背面看」的方向。
+    const backTex = await loadTexture(dir + spec.printBack, renderer);
+    textures.push(backTex);
     printPlane(tex, THREE.FrontSide).position.z = 0.02;
     const back = printPlane(backTex, THREE.FrontSide);
     back.rotation.y = Math.PI;
     back.position.z = -0.02;
   } else {
-    // 單面印刷夾在兩層正中間（z = 0）：正面、背面都是隔著一片壓克力看到圖，背面自然是鏡像。
+    // 單面印刷，或雙面印同一張（backSame）：圖夾在兩層正中間（z = 0），從背面看是鏡像，
+    // 這樣圖案才會和壓克力外框對齊（不鏡像的話，不對稱的圖會跑出外框）。
     printPlane(tex, THREE.DoubleSide);
   }
 

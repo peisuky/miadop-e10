@@ -3,7 +3,7 @@
 
   外形：角色圖案（alpha）往外留 --margin-mm 的透明邊 → 底部拉平 → 加插腳 → 圓形底座
   雙面：--back 另一張圖（檔案方向 = 從背面看過去的樣子，畫布左右和正面互為鏡像）
-        --back-same 背面印同一張（從背面看也是正的）
+        --back-same 背面印同一張（從背面看是鏡像，才會和外框對齊）
   輸出：print.png（正面）、back.png（若有）、shape.json
 
   python tools/make_art_standee.py _source/kenku/standee/front.png assets/3d/kenku-standee__kenku \
@@ -25,7 +25,7 @@ def main():
     ap.add_argument('front')
     ap.add_argument('out_dir')
     ap.add_argument('--back', help='背面圖（從背面看的方向）')
-    ap.add_argument('--back-same', action='store_true', help='背面印同一張')
+    ap.add_argument('--back-same', action='store_true', help='背面印同一張（顯示為鏡像，對齊外框）')
     ap.add_argument('--height-mm', type=float, required=True, help='角色板高度（mm，不含插腳）')
     ap.add_argument('--thickness-mm', type=float, default=5)
     ap.add_argument('--margin-mm', type=float, default=3, help='圖案外的透明留邊')
