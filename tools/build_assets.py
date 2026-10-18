@@ -55,8 +55,8 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('kenku-postcard', 'kenku/postcard', '', False),
     ('kenku-meetcard', 'kenku/mettingcard', '', False),
     ('kenku-standee/survival', 'kenku/standee', 'Survival Guide', True),
-    ('kenku-standee/ken', 'kenku/standee', 'Ken與Fred', True),
-    ('kenku-standee/fred', 'kenku/standee', 'Ken與Fred', True),
+    ('kenku-standee/ken', 'kenku/standee-censored', 'ken', True),     # 18 禁：只用打過馬賽克的版本
+    ('kenku-standee/fred', 'kenku/standee-censored', 'fred', True),
     ('kenku-standee/kenku', 'kenku/standee', 'Kenku雙面差分', True),
 ]
 IMG_EXT = ('.jpg', '.jpeg', '.png', '.webp', '.heic')

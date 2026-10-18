@@ -159,7 +159,7 @@ function card(p) {
   const has3d = p.three || p.variants?.some(v => v.three), hasVid = MEDIA[p.id]?.videos?.length;
   const badges = el('div', { class: 'badges' },
     p.isNew ? el('span', { class: 'badge new' }, t('new')) : null,
-    p.age === '18' ? el('span', { class: 'badge r18' }, 'R-18') : null,
+    p.age === '18' || p.variants?.some(v => v.age === '18') ? el('span', { class: 'badge r18' }, 'R-18') : null,   // 有任一款 18 禁就標
     p.deal ? el('span', { class: 'badge deal' }, t('dealBadge')) : null,
     p.gift ? el('span', { class: 'badge deal' }, t('gift')) : null,
     has3d ? el('span', { class: 'badge d3' }, '3D') : null,
@@ -324,7 +324,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018o');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018p');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }
