@@ -77,7 +77,7 @@ html[lang^="zh"] .lang [data-lang="zh"], html[lang="en"] .lang [data-lang="en"] 
 .ticket dl { margin: 0; display: grid; gap: 4px; }
 .ticket dl div { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 .ticket dt { font: 12px/1 var(--mo); letter-spacing: .15em; opacity: .75; min-width: 4.5em; }
-.ticket dd { margin: 0; font-weight: 900; font-size: 17px; line-height: 1.35; }
+.ticket dd { margin: 0; font-weight: 900; font-size: 17px; line-height: 1.35; word-break: keep-all; }   /* 中文只在空白處換行，地點不會斷在詞中間 */
 .ticket-state { grid-column: 1 / -1; margin: 4px 0 0; padding: 6px 10px; background: var(--paper); border-radius: 4px; font-weight: 900; text-align: center; }
 .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn {

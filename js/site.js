@@ -9,7 +9,7 @@ const STR = {
   zh: {
     'nav.skip': '跳到商品', 'nav.creators': '創作者', 'nav.goods': '商品', 'nav.howto': '購買須知', 'nav.location': '攤位位置',
     'brand.tribe': '巡獵部落', 'hero.h1': "Mi'adop 巡獵部落・攤位 E10・2026 Infurnity 獸無限",
-    'info.when': '開放時間', 'info.whenVal': '11/01（日）11:00–16:00', 'info.where': '地點', 'info.whereVal': '台中福容大飯店 麗寶樂園・商場區',
+    'info.when': '開放時間', 'info.whenVal': '11/01（日）11:00–16:00', 'info.where': '地點', 'info.whereVal': '台中麗寶福容大飯店 LF 展演A廳',
     'cta.goods': '看商品', 'cta.map': '攤位位置',
     'intro.title': '荒土上的交易營地',
     'intro.body': "文明崩落之後，荒土上長出了新的森林。Mi'adop 巡獵部落在這裡生火、編織、交換物資——11 月 1 日，部落的營地就設在 E10。帶上你的故事，來換一件行囊吧。",
@@ -18,7 +18,7 @@ const STR = {
     'howto.one': '五位創作者一起結帳', 'howto.oneSub': '不同創作者的商品可以一次買單',
     'howto.limit': '不限購', 'howto.limitSub': '數量有限，售完為止',
     'howto.date': '僅 11/01（日）出攤', 'howto.dateSub': '11:00–16:00，其他天數不在場喔',
-    'loc.title': '攤位位置', 'loc.sub': '商場區最上方的 E 排，左邊數來第 10 號。', 'loc.here': 'E10 在這裡', 'loc.full': '看完整會場地圖',
+    'loc.title': '攤位位置', 'loc.sub': '展演A廳最上方的 E 排，左邊數來第 10 號。', 'loc.here': 'E10 在這裡', 'loc.full': '看完整會場地圖',
     'foot.copy': '所有作品著作權屬於各創作者：阿爾西、Kulas、Kenku、Peisuky、香酥雞白狗。', 'foot.ga': '本站使用 Google Analytics 統計瀏覽量。',
     roles: '巡獵部落的五種職分', rolesSub: '五款服裝，五種在荒土上活下去的方式',
     see: '看這位的商品 →', tba: '價格待公布', from: '起', variants: n => `${n} 款`,
@@ -31,7 +31,7 @@ const STR = {
   en: {
     'nav.skip': 'Skip to goods', 'nav.creators': 'Creators', 'nav.goods': 'Goods', 'nav.howto': 'How to buy', 'nav.location': 'Location',
     'brand.tribe': 'HUNTING TRIBE', 'hero.h1': "Mi'adop Hunting Tribe · Booth E10 · Infurnity 2026",
-    'info.when': 'OPEN', 'info.whenVal': 'Sun, Nov 1 · 11:00–16:00', 'info.where': 'VENUE', 'info.whereVal': 'Fullon Hotel Lihpao, Taichung · Dealers Den',
+    'info.when': 'OPEN', 'info.whenVal': 'Sun, Nov 1 · 11:00–16:00', 'info.where': 'VENUE', 'info.whereVal': 'Fullon Hotel Lihpao Taichung · LF Exhibition Hall A',
     'cta.goods': 'Browse goods', 'cta.map': 'Find the booth',
     'intro.title': 'A Trading Camp in the Wasteland',
     'intro.body': "After civilization fell, new forests grew over the wasteland. The Mi'adop Hunting Tribe lights its fires, weaves and trades here — on November 1st, the camp is pitched at booth E10. Bring your story and trade it for something to carry on the road.",
@@ -40,7 +40,7 @@ const STR = {
     'howto.one': 'One checkout for all five creators', 'howto.oneSub': 'Mix items from different creators in a single purchase',
     'howto.limit': 'No purchase limit', 'howto.limitSub': 'While stocks last',
     'howto.date': 'Open on Sun, Nov 1 only', 'howto.dateSub': '11:00–16:00 — we are not there on the other days',
-    'loc.title': 'Booth Location', 'loc.sub': 'Top row E of the Dealers Den, 10th booth from the left.', 'loc.here': 'E10 is here', 'loc.full': 'Show the full floor map',
+    'loc.title': 'Booth Location', 'loc.sub': 'Top row E in Exhibition Hall A, 10th booth from the left.', 'loc.here': 'E10 is here', 'loc.full': 'Show the full floor map',
     'foot.copy': 'All artwork © their creators: Harcy, Kulas, Kenku, Peisuky and Whitedog.', 'foot.ga': 'This site uses Google Analytics to count visits.',
     roles: 'Five Roles of the Tribe', rolesSub: 'Five outfits, five ways to survive the wasteland',
     see: 'See their goods →', tba: 'Price TBA', from: '+', variants: n => `${n} styles`,
@@ -286,7 +286,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018c');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018e');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
