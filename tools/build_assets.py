@@ -16,6 +16,7 @@
 挑選結果會寫在 data/media.json；要換照片就改 data/photo-picks.json 後重跑。
 """
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -92,7 +93,8 @@ def save_pair(im, out_base, force):
         b = im.copy(); b.thumbnail((BIG, BIG), Image.LANCZOS); b.save(big, 'WEBP', quality=80, method=6)
         t = im.copy(); t.thumbnail((THUMB, THUMB), Image.LANCZOS); t.save(thumb, 'WEBP', quality=74, method=6)
     w, h = Image.open(big).size
-    rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/')
+    # 網址帶內容雜湊：換圖後網址跟著變，瀏覽器和 GitHub Pages 的快取不會一直顯示舊圖
+    rel = lambda p: os.path.relpath(p, ROOT).replace('\\', '/') + '?v=' + hashlib.md5(open(p, 'rb').read()).hexdigest()[:8]
     return {'src': rel(big), 'thumb': rel(thumb), 'w': w, 'h': h}
 
 
