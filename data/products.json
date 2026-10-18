@@ -419,7 +419,8 @@
             "en": [
               "15 cm tall"
             ]
-          }
+          },
+          "three": "assets/3d/kenku-standee__survival/shape.json"
         },
         {
           "id": "ken",
@@ -437,7 +438,8 @@
               "5 cm tall",
               "18+"
             ]
-          }
+          },
+          "three": "assets/3d/kenku-standee__ken/shape.json"
         },
         {
           "id": "fred",
@@ -455,7 +457,8 @@
               "8 cm tall",
               "18+"
             ]
-          }
+          },
+          "three": "assets/3d/kenku-standee__fred/shape.json"
         },
         {
           "id": "kenku",
@@ -472,7 +475,8 @@
               "10 cm tall",
               "Different outfit on each side"
             ]
-          }
+          },
+          "three": "assets/3d/kenku-standee__kenku/shape.json"
         }
       ]
     },

@@ -174,19 +174,34 @@ async function buildAcrylic(spec, { env, renderer, dir }) {
   }
 
   const tex = await loadTexture(dir + spec.print, renderer);
+  const textures = [tex];
   // 印刷圖用不受光的材質：顏色就是原稿顏色，不會被燈打白或背光變暗。
-  // 位在兩層正中間（z = 0）：正面、背面都是隔著一片壓克力看到圖，背面自然是鏡像。
-  const print = new THREE.Mesh(new THREE.PlaneGeometry(w, h),
-    new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, alphaTest: 0.5 }));
-  print.position.set(w / 2, h / 2, 0);
-  print.castShadow = true;
   // 陰影只看圖案的 alpha（透明壓克力本身幾乎不擋光）
-  print.customDepthMaterial = new THREE.MeshDepthMaterial({ map: tex, alphaTest: 0.5, depthPacking: THREE.RGBADepthPacking });
-  group.add(print);
+  const printPlane = (map, side) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map, side, alphaTest: 0.5 }));
+    m.position.set(w / 2, h / 2, 0);
+    m.castShadow = true;
+    m.customDepthMaterial = new THREE.MeshDepthMaterial({ map, alphaTest: 0.5, depthPacking: THREE.RGBADepthPacking });
+    group.add(m);
+    return m;
+  };
+  if (spec.printBack || spec.backSame) {
+    // 雙面印刷：正反面各一張，各自只朝外。背面那張轉 180°，從背面看是正的（不是鏡像）。
+    // printBack：背面另一張圖（檔案本身就是「從背面看」的方向）；backSame：背面印同一張
+    const backTex = spec.printBack ? await loadTexture(dir + spec.printBack, renderer) : tex;
+    if (spec.printBack) textures.push(backTex);
+    printPlane(tex, THREE.FrontSide).position.z = 0.02;
+    const back = printPlane(backTex, THREE.FrontSide);
+    back.rotation.y = Math.PI;
+    back.position.z = -0.02;
+  } else {
+    // 單面印刷夾在兩層正中間（z = 0）：正面、背面都是隔著一片壓克力看到圖，背面自然是鏡像。
+    printPlane(tex, THREE.DoubleSide);
+  }
 
   const H = baseT + h;
   return {
-    root, textures: [tex],
+    root, textures,
     size: Math.max(w, H), center: H / 2, top: H,
     foot: spec.base ? [spec.base.diameter * 1.25, spec.base.diameter * 1.25] : [w * 1.4, t * 3.2]
   };
