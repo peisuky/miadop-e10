@@ -174,8 +174,8 @@
       "specs": { "zh": ["壓克力"], "en": ["Acrylic"] },
       "variants": [
         { "id": "whitedog", "name": { "zh": "白狗", "en": "Whitedog" }, "three": "assets/3d/whitedog-dinner__whitedog/shape.json", "specs": { "zh": ["高 4cm", "厚 0.8cm"], "en": ["4 cm tall", "8 mm thick"] } },
-        { "id": "che", "name": { "zh": "che", "en": "che" }, "three": "assets/3d/whitedog-dinner__che/shape.json" },
-        { "id": "peisuky", "name": { "zh": "Peisuky", "en": "Peisuky" }, "three": "assets/3d/whitedog-dinner__peisuky/shape.json" }
+        { "id": "che", "name": { "zh": "紅狗(超扯扯)", "en": "Red Dog (超扯扯)" }, "three": "assets/3d/whitedog-dinner__che/shape.json" },
+        { "id": "peisuky", "name": { "zh": "棕狗(Peisuky)", "en": "Brown Dog (Peisuky)" }, "three": "assets/3d/whitedog-dinner__peisuky/shape.json" }
       ]
     },
     {
