@@ -53,6 +53,7 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('miadop-standee-big', 'miadop/standee-big'),   # 已打馬賽克的版本；standee/ 裡的 15cm 原稿未遮擋，不能拿來當照片
     ('kenku-book', 'kenku/book', '', False),
     ('kenku-postcard', 'kenku/postcard', '', False),
+    ('kenku-meetcard', 'kenku/mettingcard', '', False),
     ('kenku-standee/survival', 'kenku/standee', 'Survival Guide', True),
     ('kenku-standee/ken', 'kenku/standee', 'Ken與Fred', True),
     ('kenku-standee/fred', 'kenku/standee', 'Ken與Fred', True),

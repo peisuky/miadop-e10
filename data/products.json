@@ -602,6 +602,31 @@
       }
     },
     {
+      "id": "kenku-meetcard",
+      "brand": "kenku",
+      "kind": "card",
+      "name": {
+        "zh": "Kenku 認親卡",
+        "en": "Kenku Meeting Card"
+      },
+      "sub": {
+        "zh": "消費贈品・不販售",
+        "en": "Free with purchase · not for sale"
+      },
+      "lore": {
+        "zh": "在荒土上撿到彼此的證明。帶著它，下次見面就是自己人了。",
+        "en": "Proof that you found each other in the wasteland. Bring it along — next time we meet, you're family."
+      },
+      "gift": {
+        "zh": "購買攤位上任一商品（不限創作者）就送一張，送完為止",
+        "en": "Buy anything at the booth (from any creator) and get one free, while supplies last"
+      },
+      "specs": {
+        "zh": [],
+        "en": []
+      }
+    },
+    {
       "id": "peisuky-taro-badge",
       "brand": "peisuky",
       "kind": "badge",

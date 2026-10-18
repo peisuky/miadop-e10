@@ -18,6 +18,7 @@ const STR = {
     'howto.one': '五位創作者一起結帳', 'howto.oneSub': '不同創作者的商品可以一次買單',
     'howto.limit': '不限購', 'howto.limitSub': '數量有限，售完為止',
     'howto.date': '僅 11/01（日）出攤', 'howto.dateSub': '11:00–16:00，其他天數不在場喔',
+    'howto.gift': '消費送 Kenku 認親卡', 'howto.giftSub': '購買攤位上任一商品（不限創作者）就送一張，送完為止',
     'loc.title': '攤位位置', 'loc.sub': '展演A廳最上方的 E 排，左邊數來第 10 號。', 'loc.here': 'E10 在這裡', 'loc.full': '看完整會場地圖',
     'foot.copy': '所有作品著作權屬於各創作者：阿爾西、Kulas、Kenku、Peisuky、香酥雞白狗。', 'foot.ga': '本站使用 Google Analytics 統計瀏覽量。',
     roles: '巡獵部落的五種職分', rolesSub: '五款服裝，五種在荒土上活下去的方式',
@@ -28,7 +29,7 @@ const STR = {
     hint3d: '拖曳旋轉・雙指縮放', hintHold: '拖曳甩甩看・上下拖可以前後晃', loading: '載入中…', close: '關閉',
     live: t => `價格與庫存即時同步（${t} 更新）`, offline: '暫時讀不到即時庫存，顯示的是備份資料',
     stateOn: '🔥 攤位營業中！歡迎來 E10 逛逛', stateEnd: '感謝光臨，我們下次見！',
-    by: '創作者', new: 'NEW'
+    by: '創作者', new: 'NEW', gift: '贈品', giftBadge: '消費贈品'
   },
   en: {
     'nav.skip': 'Skip to goods', 'nav.creators': 'Creators', 'nav.goods': 'Goods', 'nav.howto': 'How to buy', 'nav.location': 'Location',
@@ -42,6 +43,7 @@ const STR = {
     'howto.one': 'One checkout for all five creators', 'howto.oneSub': 'Mix items from different creators in a single purchase',
     'howto.limit': 'No purchase limit', 'howto.limitSub': 'While stocks last',
     'howto.date': 'Open on Sun, Nov 1 only', 'howto.dateSub': '11:00–16:00 — we are not there on the other days',
+    'howto.gift': 'Free Kenku meeting card', 'howto.giftSub': 'Buy anything at the booth (any creator) and get one, while supplies last',
     'loc.title': 'Booth Location', 'loc.sub': 'Top row E in Exhibition Hall A, 10th booth from the left.', 'loc.here': 'E10 is here', 'loc.full': 'Show the full floor map',
     'foot.copy': 'All artwork © their creators: Harcy, Kulas, Kenku, Peisuky and Whitedog.', 'foot.ga': 'This site uses Google Analytics to count visits.',
     roles: 'Five Roles of the Tribe', rolesSub: 'Five outfits, five ways to survive the wasteland',
@@ -52,7 +54,7 @@ const STR = {
     hint3d: 'Drag to rotate · pinch to zoom', hintHold: 'Drag to swing it · drag up/down to tilt', loading: 'Loading…', close: 'Close',
     live: t => `Prices & stock synced live (updated ${t})`, offline: 'Live stock unavailable — showing backup data',
     stateOn: '🔥 We are open! Come visit booth E10', stateEnd: 'Thanks for visiting — see you next time!',
-    by: 'Creator', new: 'NEW'
+    by: 'Creator', new: 'NEW', gift: 'Free gift', giftBadge: 'Free with purchase'
   }
 };
 
@@ -124,6 +126,7 @@ function summary(p) {
   const min = prices.length ? Math.min(...prices) : null, varies = new Set(prices).size > 1;
   return { status, price: min, varies };
 }
+const giftText = () => el('span', { class: 'price gift' }, t('gift'));
 const priceText = (n, varies) => n == null ? el('span', { class: 'price tba' }, t('tba')) : el('span', { class: 'price' }, `NT$ ${n}${varies ? ' ' + t('from') : ''}`);
 const mediaOf = (p, v) => (v && MEDIA[`${p.id}/${v.id}`]) || MEDIA[p.id] || {};
 const threeOf = (p, v) => (v && v.three) || p.three || null;
@@ -158,6 +161,7 @@ function card(p) {
     p.isNew ? el('span', { class: 'badge new' }, t('new')) : null,
     p.age === '18' ? el('span', { class: 'badge r18' }, 'R-18') : null,
     p.deal ? el('span', { class: 'badge deal' }, t('dealBadge')) : null,
+    p.gift ? el('span', { class: 'badge deal' }, t('gift')) : null,
     has3d ? el('span', { class: 'badge d3' }, '3D') : null,
     hasVid ? el('span', { class: 'badge vid' }, '▶ VIDEO') : null);
   const ph = cover
@@ -169,7 +173,7 @@ function card(p) {
     el('h4', {}, L(p.name)),
     p.sub ? el('p', { class: 'sub' }, L(p.sub)) : null,
     el('div', { class: 'meta' },
-      s.status === 'soon' ? el('span', { class: 'status soon' }, t('soon')) : priceText(s.price, s.varies),
+      s.status === 'soon' ? el('span', { class: 'status soon' }, t('soon')) : p.gift ? giftText() : priceText(s.price, s.varies),
       s.status === 'partial' ? el('span', { class: 'status partial' }, t('partial')) : p.variants ? el('span', { class: 'count' }, t('variants', p.variants.length)) : null));
 }
 
@@ -272,10 +276,11 @@ function fillInfo() {
     }
     vb.append(row);
   }
-  const pr = $('#mPrice'); pr.replaceChildren(i.status === 'soon' ? '' : priceText(i.price));
+  const pr = $('#mPrice'); pr.replaceChildren(i.status === 'soon' ? '' : p.gift ? giftText() : priceText(i.price));
   const st = $('#mStatus'); st.className = 'status ' + i.status; st.textContent = t(i.status);
+  st.hidden = p.gift && i.status === 'on';   // 贈品不寫「販售中」，送完時試算表改完售才顯示
   $('#mLore').textContent = L(p.lore);
-  $('#mDeal').hidden = !p.deal; $('#mDeal').replaceChildren(el('b', {}, t('dealBadge')), L(p.deal));
+  $('#mDeal').hidden = !p.deal && !p.gift; $('#mDeal').replaceChildren(el('b', {}, t(p.gift ? 'giftBadge' : 'dealBadge')), L(p.gift || p.deal));
   $('#mAge').hidden = (v?.age || p.age) !== '18'; $('#mAge').textContent = t('age18');
   const specs = [...(L(p.specs) || []), ...(v ? L(v.specs) || [] : [])];
   $('#mSpecs').replaceChildren(...specs.map(s => el('li', {}, s)));
@@ -309,7 +314,7 @@ async function showItem(k) {
     stage.append(el('span', { class: 'loading' }, t('loading')));
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018m');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018n');
       if (seq !== viewerSeq) return;
       stage.replaceChildren();
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });

@@ -794,5 +794,15 @@
     "h": 1600
    }
   ]
+ },
+ "kenku-meetcard": {
+  "photos": [
+   {
+    "src": "assets/img/kenku-meetcard/01.webp",
+    "thumb": "assets/img/kenku-meetcard/01_t.webp",
+    "w": 1200,
+    "h": 1500
+   }
+  ]
  }
 }

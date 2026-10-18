@@ -177,6 +177,7 @@ html[lang="en"] .badge.deal { font-family: var(--an); font-weight: 400; }
 .card .meta { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin: 8px 4px 0; flex-wrap: wrap; }
 .price { font: 400 18px/1 var(--an); letter-spacing: .04em; }
 .price.tba { font: 700 13px/1.2 var(--zh); opacity: .7; }
+.price.gift { font: 900 15px/1.2 var(--zh); color: var(--brick); }
 .count { font-size: 12px; font-weight: 700; background: var(--cream); padding: 2px 8px; border-radius: 999px; }
 .stamp {
   position: absolute; inset: 0; display: grid; place-items: center; background: rgba(246, 238, 216, .55);
@@ -190,7 +191,7 @@ html[lang="en"] .stamp b { font-family: var(--an); font-weight: 400; letter-spac
 
 /* ---------- 購買須知 ---------- */
 .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
-@media (min-width: 720px) { .rules { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 720px) { .rules { grid-template-columns: 1fr 1fr; } .rules li.wide { grid-column: 1 / -1; } }
 .rules li { display: flex; gap: 14px; align-items: center; background: var(--paper); padding: 14px 16px; border-radius: 8px; box-shadow: var(--sh2); }
 .rules li:nth-child(2n) { rotate: .5deg; } .rules li:nth-child(2n+1) { rotate: -.5deg; }
 .rules b { font-size: 28px; width: 48px; height: 48px; display: grid; place-items: center; background: var(--cream); border-radius: 50%; flex: none; }
