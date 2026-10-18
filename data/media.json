@@ -778,5 +778,21 @@
     "h": 1600
    }
   ]
+ },
+ "miadop-standee-big": {
+  "photos": [
+   {
+    "src": "assets/img/miadop-standee-big/01.webp",
+    "thumb": "assets/img/miadop-standee-big/01_t.webp",
+    "w": 1279,
+    "h": 1600
+   },
+   {
+    "src": "assets/img/miadop-standee-big/02.webp",
+    "thumb": "assets/img/miadop-standee-big/02_t.webp",
+    "w": 1279,
+    "h": 1600
+   }
+  ]
  }
 }

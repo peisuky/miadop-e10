@@ -332,6 +332,39 @@
       "three": "assets/3d/miadop-standee__kulas/shape.json"
     },
     {
+      "id": "miadop-standee-big",
+      "brand": "miadop",
+      "kind": "acrylic",
+      "age": "18",
+      "name": {
+        "zh": "Kulas 雙面大立牌",
+        "en": "Kulas Double-sided Large Standee"
+      },
+      "sub": {
+        "zh": "寬 15cm・正反兩面不同",
+        "en": "15 cm wide · different art on each side"
+      },
+      "lore": {
+        "zh": "卸下一身裝備、靠坐著歇息的 Kulas。翻到背面，還有另一副模樣。",
+        "en": "Kulas leaning back with all his gear off. Turn it around for a different look."
+      },
+      "specs": {
+        "zh": [
+          "雙面印刷壓克力立牌（含底座）",
+          "寬 15cm",
+          "18+",
+          "網頁圖片已打馬賽克"
+        ],
+        "en": [
+          "Double-sided printed acrylic standee with base",
+          "15 cm wide",
+          "18+",
+          "Images censored on this site"
+        ]
+      },
+      "three": "assets/3d/miadop-standee-big__kulas/shape.json"
+    },
+    {
       "id": "kenku-book",
       "brand": "kenku",
       "kind": "book",
