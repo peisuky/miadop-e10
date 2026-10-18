@@ -24,7 +24,7 @@ body {
   background: var(--sky); background-image: var(--fibre);
   overflow-x: hidden;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }   /* height:auto：不讓 <img height> 屬性把圖拉長變形 */
 a { color: inherit; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .mo { font-family: var(--mo); letter-spacing: .12em; }
@@ -197,20 +197,30 @@ html[lang="en"] .stamp b { font-family: var(--an); font-weight: 400; letter-spac
 /* ---------- 地圖 ---------- */
 .map-card { background: var(--paper); border-radius: 8px; padding: 12px; box-shadow: var(--sh3); }
 .map-erow, .map-full-img { position: relative; border-radius: 5px; overflow: hidden; }
+.map-erow { overflow: visible; margin: 14px 0 38px; }   /* 紅圈和「E10 在這裡」標籤可以超出圖片邊緣 */
+.map-erow img { border-radius: 5px; }
 .map-erow img { width: 100%; }
 .pin { position: absolute; translate: -50% -50%; pointer-events: none; }
 .pin i { display: block; width: 34px; height: 34px; border-radius: 50%; border: 4px solid var(--brick); background: rgba(196, 85, 58, .2); animation: pulse 1.6s ease-out infinite; }
 .pin b { position: absolute; left: 50%; bottom: calc(100% + 6px); translate: -50% 0; white-space: nowrap; font: 900 13px/1 var(--zh); background: var(--brick); color: var(--paper); padding: 5px 8px; border-radius: 4px; box-shadow: var(--sh1); }
-.map-erow .pin { top: 49%; }
+/* E 排放大圖：紅圈用圖片寬度的百分比，不論螢幕多寬都把整個「10」圈住（蓋到旁邊沒關係） */
+.map-erow .pin { top: 49%; width: 15%; }
+.map-erow .pin i { width: 100%; height: auto; aspect-ratio: 1; border-width: 5px; background: rgba(196, 85, 58, .12); }
 .map-erow .pin b { bottom: auto; top: calc(100% + 4px); }
 @keyframes pulse { 0% { scale: .7; opacity: 1; } 100% { scale: 1.5; opacity: 0; } }
 .map-erow .pin i { animation-name: pulse2; }
-@keyframes pulse2 { 0%, 100% { scale: .85; } 50% { scale: 1.15; } }
+@keyframes pulse2 { 0%, 100% { scale: 1; } 50% { scale: 1.12; } }   /* 最小也維持原大，才不會縮到露出數字邊緣 */
 .map-full { margin-top: 10px; }
 .map-full summary { cursor: pointer; font-weight: 900; padding: 8px 4px; list-style: none; }
 .map-full summary::before { content: '▸ '; }
 .map-full[open] summary::before { content: '▾ '; }
-.map-full .pin i { width: 26px; height: 26px; }
+/* 完整地圖：其他攤位壓暗，只留 E10 一格亮著（用超大陰影當遮罩） */
+.map-full-img .spot {
+  position: absolute; width: 3.2%; height: 5%; translate: -50% -50%; border-radius: 5px; pointer-events: none;
+  box-shadow: 0 0 0 3px var(--brick), 0 0 14px 4px rgba(196, 85, 58, .9), 0 0 0 4000px rgba(28, 27, 24, .64);
+  animation: spot 1.8s ease-in-out infinite;
+}
+@keyframes spot { 50% { box-shadow: 0 0 0 4px var(--brick), 0 0 22px 8px rgba(196, 85, 58, .95), 0 0 0 4000px rgba(28, 27, 24, .64); } }
 
 
 /* ---------- 頁尾 ---------- */
@@ -295,4 +305,4 @@ html[lang="en"] .stamp b { font-family: var(--an); font-weight: 400; letter-spac
   .modal-info { flex: 1; overflow-y: auto; padding: 56px 28px 28px; }
   .modal-close { position: absolute; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pin i { animation: none; } * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pin i, .spot { animation: none; } * { transition: none !important; } }
