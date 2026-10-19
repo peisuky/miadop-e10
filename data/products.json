@@ -784,7 +784,11 @@
           },
           "three": "assets/3d/whitedog-explorer__peisuky/shape.json"
         }
-      ]
+      ],
+      "deal": {
+        "zh": "4 款一起買只要 NT$350（原價 NT$400）",
+        "en": "All 4 together for just NT$350 (NT$400 separately)"
+      }
     }
   ]
 }
