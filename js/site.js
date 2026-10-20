@@ -94,7 +94,7 @@ function parseCSV(text) {
 async function loadSheet() {
   if (!SITE.sheet) return;
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SITE.sheet}/gviz/tq?tqx=out:csv&t=${Date.now()}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SITE.sheet}/gviz/tq?tqx=out:csv&headers=1&t=${Date.now()}`;
     const res = await fetch(url, { cache: 'no-store' });
     const text = await res.text();
     if (!res.ok || text.trimStart().startsWith('<')) throw new Error('sheet not public');
@@ -119,7 +119,7 @@ function info(key) {
   const n = parseInt(String(r.price || '').replace(/[^\d]/g, ''), 10);
   return { price: Number.isFinite(n) ? n : null, status: statusCode(r.status || ''), note: r.note || {} };
 }
-const keysOf = (p) => p.variants ? p.variants.map(v => `${p.id}/${v.id}`) : [p.id];
+const keysOf = (p) => p.variants ? p.variants.map(v => `${p.id}/${v.id}`) : [p.sheetKey || p.id];   // sheetKey：試算表 key 和商品編號不同時用
 function summary(p) {
   const all = keysOf(p).map(info), sts = all.map(i => i.status), prices = all.map(i => i.price).filter(x => x != null);
   const status = sts.every(s => s === 'sold') ? 'sold' : sts.every(s => s === 'soon') ? 'soon' : sts.some(s => s === 'sold') ? 'partial' : 'on';
@@ -251,7 +251,7 @@ function fillModal() {
 
 // 只更新文字（價格、狀態、語言）：試算表定時更新或切換語言時用，不打斷正在轉的 3D
 function fillInfo() {
-  const { p, v } = cur, b = DATA.brands.find(x => x.id === p.brand), key = v ? `${p.id}/${v.id}` : p.id, i = info(key);
+  const { p, v } = cur, b = DATA.brands.find(x => x.id === p.brand), key = v ? `${p.id}/${v.id}` : p.sheetKey || p.id, i = info(key);
   $('#mBrand').textContent = `${t('by')} ・ ${L(b.name)}`;
   $('#mName').textContent = L(p.name);
   $('#mSub').textContent = [L(p.sub), v ? L(v.name) : ''].filter(Boolean).join(' ・ ');
@@ -324,7 +324,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261018p');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261020a');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }

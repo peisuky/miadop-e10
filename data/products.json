@@ -280,8 +280,8 @@
       "brand": "miadop",
       "kind": "acrylic",
       "name": {
-        "zh": "Kulas 壓克力吊飾",
-        "en": "Kulas Acrylic Keychain"
+        "zh": "抖抖鑰匙圈",
+        "en": "Shake-Shake Keychain"
       },
       "sub": {
         "zh": "甩頭的 Kulas",
@@ -301,15 +301,16 @@
           "4 cm tall"
         ]
       },
-      "three": "assets/3d/miadop-keychain__kulas/shape.json"
+      "three": "assets/3d/miadop-keychain__kulas/shape.json",
+      "sheetKey": "miadop-vibrating emoji keychain"
     },
     {
       "id": "miadop-standee",
       "brand": "miadop",
       "kind": "acrylic",
       "name": {
-        "zh": "Kulas 壓克力立牌",
-        "en": "Kulas Acrylic Standee"
+        "zh": "露友立牌(小)",
+        "en": "Camping Buddy Standee (S)"
       },
       "sub": {
         "zh": "坐著休息的 Kulas",
@@ -329,7 +330,8 @@
           "8 cm tall"
         ]
       },
-      "three": "assets/3d/miadop-standee__kulas/shape.json"
+      "three": "assets/3d/miadop-standee__kulas/shape.json",
+      "sheetKey": "miadop-camping buddy standee (S)"
     },
     {
       "id": "miadop-standee-big",
@@ -337,8 +339,8 @@
       "kind": "acrylic",
       "age": "18",
       "name": {
-        "zh": "Kulas 雙面大立牌",
-        "en": "Kulas Double-sided Large Standee"
+        "zh": "露友立牌(大)",
+        "en": "Camping Buddy Standee (L)"
       },
       "sub": {
         "zh": "寬 15cm・正反兩面不同",
@@ -362,7 +364,8 @@
           "Images censored on this site"
         ]
       },
-      "three": "assets/3d/miadop-standee-big__kulas/shape.json"
+      "three": "assets/3d/miadop-standee-big__kulas/shape.json",
+      "sheetKey": "miadop-camping buddy standee (L)"
     },
     {
       "id": "kenku-book",
