@@ -146,6 +146,7 @@ html[lang="en"] .cut-title { font-family: var(--an); font-weight: 400; letter-sp
 .brand-head .bh-avatars img { width: 54px; height: 54px; object-fit: contain; filter: drop-shadow(2px 4px 4px rgba(42, 26, 8, .35)); }
 .brand-head .bh-avatars img + img { margin-left: -14px; }
 .brand-head h3 { margin: 0; font: 400 28px/1 var(--an); letter-spacing: .05em; }
+.creator h3.cjk, .brand-head h3.cjk { font-family: var(--zh); font-weight: 900; letter-spacing: .04em; }
 .brand-head p { margin: 2px 0 0; font-size: 13px; font-weight: 900; color: var(--ruin); }
 .brand-head::after { content: ''; flex: 1; height: 11px; background: var(--weave); opacity: .5; align-self: center; min-width: 30px; }
 .roles-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 4px 0 12px; }

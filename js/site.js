@@ -138,6 +138,9 @@ function applyStatic() {
   $('#mClose').setAttribute('aria-label', t('close'));
 }
 
+// Anton 沒有中文字，中文名字會退回細的 Noto Sans TC：改用 Noto Sans TC 的 900 粗體，和英文名字一樣粗
+const cjkClass = (s) => /[㐀-鿿]/.test(s) ? 'cjk' : '';
+
 function renderCreators() {
   const box = $('#creatorList'); box.replaceChildren();
   for (const b of DATA.brands) {
@@ -145,7 +148,7 @@ function renderCreators() {
     const links = b.members.flatMap(m => m.links || []);
     box.append(el('a', { class: 'creator', href: `#brand-${b.id}` },
       el('div', { class: 'avatars' }, b.members.map(m => el('img', { src: m.avatar, alt: L(m.name), loading: 'lazy', width: 140, height: 150 }))),
-      el('h3', {}, b.logo ? el('img', { src: b.logo, alt: '' }) : null, L(b.name)),
+      el('h3', { class: cjkClass(L(b.name)) }, b.logo ? el('img', { src: b.logo, alt: '' }) : null, L(b.name)),
       el('p', { class: 'tl' }, L(b.tagline)),
       b.members.length > 1 ? el('div', { class: 'who' }, names) : null,
       el('p', {}, L(b.blurb)),
@@ -184,7 +187,7 @@ function renderGoods() {
     const block = el('div', { class: 'brand-block', id: `brand-${b.id}` },
       el('div', { class: 'brand-head' },
         el('div', { class: 'bh-avatars' }, b.members.map(m => el('img', { src: m.avatar, alt: '', loading: 'lazy' }))),
-        el('div', {}, el('h3', {}, L(b.name)), el('p', {}, L(b.tagline)))));
+        el('div', {}, el('h3', { class: cjkClass(L(b.name)) }, L(b.name)), el('p', {}, L(b.tagline)))));
     const outfits = items.filter(p => p.kind === 'outfit'), rest = items.filter(p => p.kind !== 'outfit');
     if (outfits.length) {
       block.append(el('div', { class: 'roles-head' }, el('h4', {}, t('roles')), el('span', {}, t('rolesSub'))),
@@ -324,7 +327,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261020a');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261020b');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }
