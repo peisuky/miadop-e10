@@ -12,8 +12,8 @@
         "en": "A label by Harcy × Kulas"
       },
       "blurb": {
-        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、捕夢網、ㄍㄧㄡˇ包，還有 Kulas 的壓克力吊飾與立牌，都是巡獵部落行囊裡的東西。",
-        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus a dreamcatcher, an herb pouch and Kulas acrylics — everything a hunting tribe packs for the road."
+        "zh": "把部落的織紋縫進荒土的風裡。五種職分的服裝、ㄍㄧㄡˇ包，還有 Kulas 的壓克力吊飾與立牌，都是巡獵部落行囊裡的東西。",
+        "en": "Sewing tribal weaves into the wasteland wind. Five tribal roles to wear, plus an herb pouch and Kulas acrylics — everything a hunting tribe packs for the road."
       },
       "members": [
         {
@@ -252,7 +252,8 @@
       "specs": {
         "zh": [],
         "en": []
-      }
+      },
+      "hidden": true
     },
     {
       "id": "miadop-grassbag",

@@ -327,7 +327,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261020b');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261021a');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }
@@ -387,6 +387,7 @@ function initGA(id) {
 (async function boot() {
   const j = (u) => fetch(u, { cache: 'no-cache' }).then(r => r.json());
   [DATA, MEDIA, SITE] = await Promise.all([j('data/products.json'), j('data/media.json'), j('data/site.json')]);
+  DATA.products = DATA.products.filter(p => !p.hidden);   // hidden: true = 暫時下架（資料留著，改回 false 就恢復）
   SHEET = SITE.fallback || {};
   renderAll();                                  // 先用備份資料畫出來，不等試算表
   initGA(SITE.ga);
