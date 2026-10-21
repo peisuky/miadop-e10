@@ -27,7 +27,6 @@ const STR = {
     see: '看這位的商品 →', tba: '價格待公布', from: '起', variants: n => `${n} 款`,
     on: '販售中', sold: '完售', soon: '即將公開', partial: '部分完售', soonCard: '即將公開',
     hint3d: '拖曳旋轉・雙指縮放', hintHold: '拖曳甩甩看・上下拖可以前後晃', loading: '載入中…', close: '關閉',
-    live: t => `價格與庫存即時同步（${t} 更新）`, offline: '暫時讀不到即時庫存，顯示的是備份資料',
     stateOn: '🔥 攤位營業中！歡迎來 E10 逛逛', stateEnd: '感謝光臨，我們下次見！',
     by: '創作者', new: 'NEW', gift: '贈品', giftBadge: '消費贈品'
   },
@@ -52,7 +51,6 @@ const STR = {
     see: 'See their goods →', tba: 'Price TBA', from: '+', variants: n => `${n} styles`,
     on: 'Available', sold: 'Sold out', soon: 'Coming soon', partial: 'Some sold out', soonCard: 'Coming soon',
     hint3d: 'Drag to rotate · pinch to zoom', hintHold: 'Drag to swing it · drag up/down to tilt', loading: 'Loading…', close: 'Close',
-    live: t => `Prices & stock synced live (updated ${t})`, offline: 'Live stock unavailable — showing backup data',
     stateOn: '🔥 We are open! Come visit booth E10', stateEnd: 'Thanks for visiting — see you next time!',
     by: 'Creator', new: 'NEW', gift: 'Free gift', giftBadge: 'Free with purchase'
   }
@@ -206,8 +204,6 @@ function renderMeta() {
   st.textContent = ev.includes('活動中') ? t('stateOn') : ev.includes('活動結束') ? t('stateEnd') : '';
   const n = SHEET['@公告']?.note || {}, msg = n[lang] || n.zh || '';
   const notice = $('#notice'); notice.hidden = !msg; notice.textContent = msg;
-  const fmt = (d) => `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-  $('#sync').textContent = sheetOk ? t('live', fmt(sheetAt)) : t('offline');
 }
 
 function renderAll() { applyStatic(); renderCreators(); renderGoods(); renderMeta(); if (cur) fillInfo(); }
@@ -327,7 +323,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261021a');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261021b');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }
