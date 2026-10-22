@@ -361,7 +361,13 @@
     "w": 864,
     "h": 1080
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-dinner/whitedog/render.webp?v=9e95209a",
+   "thumb": "assets/img/whitedog-dinner/whitedog/render_t.webp?v=82fce3d7",
+   "w": 1031,
+   "h": 1289
+  }
  },
  "whitedog-dinner/che": {
   "photos": [
@@ -395,7 +401,13 @@
     "w": 1144,
     "h": 1431
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-dinner/che/render.webp?v=360c2298",
+   "thumb": "assets/img/whitedog-dinner/che/render_t.webp?v=d5ab9ad0",
+   "w": 1052,
+   "h": 1317
+  }
  },
  "whitedog-dinner/peisuky": {
   "photos": [
@@ -429,7 +441,13 @@
     "w": 1213,
     "h": 1516
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-dinner/peisuky/render.webp?v=bde46f3b",
+   "thumb": "assets/img/whitedog-dinner/peisuky/render_t.webp?v=f00143e8",
+   "w": 1099,
+   "h": 1374
+  }
  },
  "whitedog-explorer/whitedog": {
   "photos": [
@@ -469,7 +487,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-explorer/whitedog/render.webp?v=3b2c5e41",
+   "thumb": "assets/img/whitedog-explorer/whitedog/render_t.webp?v=bc905176",
+   "w": 988,
+   "h": 1233
+  }
  },
  "whitedog-explorer/harcy": {
   "photos": [
@@ -509,7 +533,13 @@
     "w": 1281,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-explorer/harcy/render.webp?v=f8b61ce7",
+   "thumb": "assets/img/whitedog-explorer/harcy/render_t.webp?v=27ed0828",
+   "w": 988,
+   "h": 1236
+  }
  },
  "whitedog-explorer/kulas": {
   "photos": [
@@ -549,7 +579,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-explorer/kulas/render.webp?v=21eaa827",
+   "thumb": "assets/img/whitedog-explorer/kulas/render_t.webp?v=7e35fe4f",
+   "w": 987,
+   "h": 1233
+  }
  },
  "whitedog-explorer/peisuky": {
   "photos": [
@@ -589,7 +625,13 @@
     "w": 1279,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/whitedog-explorer/peisuky/render.webp?v=024388e6",
+   "thumb": "assets/img/whitedog-explorer/peisuky/render_t.webp?v=ac3c34da",
+   "w": 992,
+   "h": 1239
+  }
  },
  "peisuky-taro-badge": {
   "photos": [
@@ -623,7 +665,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/peisuky-taro-badge/render.webp?v=cb10f46d",
+   "thumb": "assets/img/peisuky-taro-badge/render_t.webp?v=dcb2e6b6",
+   "w": 600,
+   "h": 750
+  }
  },
  "miadop-dreamcatcher": {
   "photos": []
@@ -673,7 +721,13 @@
   ]
  },
  "kenku-standee": {
-  "photos": []
+  "photos": [],
+  "cover": {
+   "src": "assets/img/kenku-standee/cover.webp?v=3af4efa2",
+   "thumb": "assets/img/kenku-standee/cover_t.webp?v=0879900c",
+   "w": 1280,
+   "h": 1600
+  }
  },
  "kenku-keychain/ken": {
   "photos": [
@@ -683,7 +737,13 @@
     "w": 1219,
     "h": 1523
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-keychain/ken/render.webp?v=0c17e0cd",
+   "thumb": "assets/img/kenku-keychain/ken/render_t.webp?v=6eab3964",
+   "w": 874,
+   "h": 1093
+  }
  },
  "kenku-keychain/fread": {
   "photos": [
@@ -693,13 +753,19 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-keychain/fread/render.webp?v=eb167982",
+   "thumb": "assets/img/kenku-keychain/fread/render_t.webp?v=05872cfe",
+   "w": 874,
+   "h": 1092
+  }
  },
  "whitedog-dinner": {
   "cover": {
-   "src": "assets/img/whitedog-dinner/cover.webp?v=f62b12bd",
-   "thumb": "assets/img/whitedog-dinner/cover_t.webp?v=d2899199",
-   "w": 1279,
+   "src": "assets/img/whitedog-dinner/cover.webp?v=c09ae1bc",
+   "thumb": "assets/img/whitedog-dinner/cover_t.webp?v=a322d689",
+   "w": 1280,
    "h": 1600
   }
  },
@@ -721,7 +787,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-standee/survival/render.webp?v=19c6780e",
+   "thumb": "assets/img/kenku-standee/survival/render_t.webp?v=af986fb1",
+   "w": 978,
+   "h": 1222
+  }
  },
  "kenku-standee/ken": {
   "photos": [
@@ -731,7 +803,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-standee/ken/render.webp?v=63604308",
+   "thumb": "assets/img/kenku-standee/ken/render_t.webp?v=0f4024b5",
+   "w": 1048,
+   "h": 1309
+  }
  },
  "kenku-standee/fred": {
   "photos": [
@@ -741,7 +819,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-standee/fred/render.webp?v=402e41d3",
+   "thumb": "assets/img/kenku-standee/fred/render_t.webp?v=4528a791",
+   "w": 990,
+   "h": 1238
+  }
  },
  "kenku-standee/kenku": {
   "photos": [
@@ -757,7 +841,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/kenku-standee/kenku/render.webp?v=52b36a4f",
+   "thumb": "assets/img/kenku-standee/kenku/render_t.webp?v=26c3f202",
+   "w": 981,
+   "h": 1227
+  }
  },
  "miadop-keychain": {
   "photos": [
@@ -767,7 +857,13 @@
     "w": 691,
     "h": 863
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/miadop-keychain/render.webp?v=0212bf79",
+   "thumb": "assets/img/miadop-keychain/render_t.webp?v=db57dc8d",
+   "w": 860,
+   "h": 1076
+  }
  },
  "miadop-standee": {
   "photos": [
@@ -777,7 +873,13 @@
     "w": 1280,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/miadop-standee/render.webp?v=37e17def",
+   "thumb": "assets/img/miadop-standee/render_t.webp?v=e24a31f8",
+   "w": 987,
+   "h": 1232
+  }
  },
  "miadop-standee-big": {
   "photos": [
@@ -793,7 +895,13 @@
     "w": 1279,
     "h": 1600
    }
-  ]
+  ],
+  "render": {
+   "src": "assets/img/miadop-standee-big/render.webp?v=4ea065c0",
+   "thumb": "assets/img/miadop-standee-big/render_t.webp?v=57aeb17b",
+   "w": 993,
+   "h": 1242
+  }
  },
  "kenku-meetcard": {
   "photos": [
@@ -804,5 +912,21 @@
     "h": 1500
    }
   ]
+ },
+ "kenku-keychain": {
+  "cover": {
+   "src": "assets/img/kenku-keychain/cover.webp?v=4bd6564f",
+   "thumb": "assets/img/kenku-keychain/cover_t.webp?v=f19ba50f",
+   "w": 1280,
+   "h": 1600
+  }
+ },
+ "whitedog-explorer": {
+  "cover": {
+   "src": "assets/img/whitedog-explorer/cover.webp?v=36591e06",
+   "thumb": "assets/img/whitedog-explorer/cover_t.webp?v=dd0b0205",
+   "w": 1280,
+   "h": 1600
+  }
  }
 }

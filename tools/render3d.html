@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- 把 3D 商品拍成一張靜態圖（tools/render_3d.py 用 headless Chrome 開這頁截圖）。
+     ?item=assets/3d/xxx/shape.json&view=front|threeQuarter&bg=ffffff&fit=1.3 -->
+<html><head><meta charset="utf-8">
+<style>html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; } #v { position: absolute; inset: 0; } #v canvas { width: 100% !important; height: 100% !important; }</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head><body><div id="v"></div>
+<script type="module">
+import { createProductViewer } from '../viewer/product3d.js';
+const q = new URLSearchParams(location.search);
+const v = await createProductViewer(document.getElementById('v'), {
+  src: '../' + q.get('item'), background: parseInt(q.get('bg') || 'ffffff', 16), autoRotate: false, fit: +(q.get('fit') || 1) });
+if (q.get('view')) v.view(q.get('view'));
+</script>
+</body></html>

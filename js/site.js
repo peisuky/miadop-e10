@@ -156,7 +156,7 @@ function renderCreators() {
 }
 
 function card(p) {
-  const s = summary(p), v0 = p.variants?.[0], m = mediaOf(p, v0), cover = MEDIA[p.id]?.cover || m.photos?.[0];   // 有指定封面就用封面
+  const s = summary(p), v0 = p.variants?.[0], m = mediaOf(p, v0), cover = MEDIA[p.id]?.cover || m.render || m.photos?.[0];   // 封面 → 3D 模擬圖 → 第一張照片
   const has3d = p.three || p.variants?.some(v => v.three), hasVid = MEDIA[p.id]?.videos?.length;
   const badges = el('div', { class: 'badges' },
     p.isNew ? el('span', { class: 'badge new' }, t('new')) : null,
@@ -262,7 +262,7 @@ function fillInfo() {
       el('b', {}, t('pick')), el('span', {}, t('pickCount', p.variants.length)), el('em', {}, `${k} / ${p.variants.length}`)));
     const row = el('div', { class: 'v-row', role: 'radiogroup', 'aria-label': t('pick') });
     for (const x of p.variants) {
-      const sold = info(`${p.id}/${x.id}`).status === 'sold', ph = mediaOf(p, x).photos?.[0];
+      const sold = info(`${p.id}/${x.id}`).status === 'sold', mx = mediaOf(p, x), ph = mx.render || mx.photos?.[0];
       row.append(el('button', { type: 'button', role: 'radio', 'aria-checked': String(x === v), class: 'v-card' + (sold ? ' sold' : ''),
         onclick: () => {
           if (x === cur.v) return;
@@ -323,7 +323,7 @@ async function showItem(k) {
     stage.append(spin);
     const seq = ++viewerSeq;
     try {
-      const { createProductViewer } = await import('../viewer/product3d.js?v=20261021b');
+      const { createProductViewer } = await import('../viewer/product3d.js?v=20261022a');
       if (seq !== viewerSeq) return;
       const vw = await createProductViewer(stage, { src: it.src, background: 0xefe3c4 });
       if (seq !== viewerSeq) { vw.dispose(); return; }

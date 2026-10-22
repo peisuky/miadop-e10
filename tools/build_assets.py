@@ -3,7 +3,7 @@
 
   python tools/build_assets.py            # 全部（已存在的檔案會跳過）
   python tools/build_assets.py --force    # 全部重做
-  python tools/build_assets.py --only photos|videos|brand
+  python tools/build_assets.py --only photos|videos|brand|renders
 
 輸出：
   assets/img/<商品>/<款式>/NN.webp      長邊 1600px（視窗大圖）
@@ -25,7 +25,7 @@ import tempfile
 
 import cv2
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, '_source')
@@ -61,8 +61,7 @@ PHOTO_SETS = [   # (商品/款式, 資料夾)
     ('kenku-standee/kenku', 'kenku/standee', 'Kenku雙面差分', True),
 ]
 IMG_EXT = ('.jpg', '.jpeg', '.png', '.webp', '.heic')
-COVERS = {   # 商品卡封面另外指定（沒指定就用第一款的第一張照片）
-    'whitedog-dinner': 'whitedog/dinner-standee/IMG_1009.jpg',
+COVERS = {   # 商品卡封面另外指定照片（有 3D 模擬圖的商品改由 build_renders 產生封面）
 }
 CARD_ASPECT = 4 / 5   # 商品卡圖片比例（寬 / 高），和 css 的 .card .ph 一致
 CARD_FIT = 0.72       # 商品最長邊佔畫面的比例；一般正面照的商品面積會 > 1/3
@@ -284,10 +283,72 @@ def build_brand(force):
     print('brand assets ok')
 
 
+def render_bbox(im):
+    """3D 模擬圖的商品範圍（不含地上的陰影）：商品的邊都很銳利（線稿、壓克力邊、金屬圓環、底座邊），
+    陰影和背景漸層都是柔的 → 用邊緣強度找範圍，再去掉零星雜點。"""
+    g = cv2.GaussianBlur(cv2.cvtColor(np.asarray(im.convert('RGB')), cv2.COLOR_RGB2GRAY), (3, 3), 0)
+    mag = cv2.magnitude(cv2.Sobel(g, cv2.CV_32F, 1, 0), cv2.Sobel(g, cv2.CV_32F, 0, 1))
+    m = cv2.morphologyEx((mag > 40).astype(np.uint8), cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    n, _, st, _ = cv2.connectedComponentsWithStats(m)
+    keep = [i for i in range(1, n) if st[i, cv2.CC_STAT_AREA] > 150]
+    if not keep:
+        return None
+    x0 = min(st[i, 0] for i in keep); y0 = min(st[i, 1] for i in keep)
+    x1 = max(st[i, 0] + st[i, 2] for i in keep); y1 = max(st[i, 1] + st[i, 3] for i in keep)
+    return int(x0), int(y0), int(x1 - x0), int(y1 - y0)
+
+
+def build_renders(media, force):
+    """tools/render_3d.py 拍好的 3D 模擬圖 → 商品卡縮圖（media[key]['render']）。
+    多款商品另外把各款拼成一張封面（2 款左右、3 款上二下一、4 款田字），當商品卡封面。"""
+    products = {p['id']: p for p in json.load(open(os.path.join(ROOT, 'data', 'products.json'), encoding='utf-8'))['products']}
+    rdir = os.path.join(SRC, 'renders')
+    if not os.path.isdir(rdir):
+        return
+    tight = {}
+    for f in sorted(os.listdir(rdir)):
+        name = os.path.splitext(f)[0]
+        pid, _, vid = name.partition('__')
+        p = products.get(pid)
+        if not p:
+            continue
+        key = f'{pid}/{vid}' if p.get('variants') else pid     # 沒有分款的商品：資料夾名後面那段不用
+        im = Image.open(os.path.join(rdir, f)).convert('RGB')
+        bb = render_bbox(im)
+        x, y, w, h = bb
+        m = int(max(w, h) * .14)   # 留多一點邊：拼封面時四周會羽化
+        tight[key] = im.crop((max(0, x - m), max(0, y - m), min(im.width, x + w + m), min(im.height, y + h + m)))
+        media.setdefault(key, {})['render'] = save_pair(card_crop(im, bb, fit=0.8), os.path.join(ROOT, 'assets', 'img', key, 'render'), force)
+        print(key, 'render')
+    for pid, p in products.items():
+        keys = [f"{pid}/{v['id']}" for v in p.get('variants') or []]
+        if len(keys) < 2 or not all(k in tight for k in keys):
+            continue
+        W, H = 1280, 1600
+        n = len(keys)
+        if n == 2:
+            cells = [(0, 0, W // 2, H), (W // 2, 0, W, H)]
+        elif n == 3:     # 上二下一（下面那格置中）：比排成三欄或三列每款都大一倍
+            cells = [(0, 0, W // 2, H // 2), (W // 2, 0, W, H // 2), (W // 4, H // 2, W * 3 // 4, H)]
+        else:
+            cells = [((i % 2) * W // 2, (i // 2) * H // 2, (i % 2 + 1) * W // 2, (i // 2 + 1) * H // 2) for i in range(4)]
+        sheet = Image.new('RGB', (W, H), (247, 247, 247))
+        for k, (x0, y0, x1, y1) in zip(keys, cells):
+            t = tight[k].copy()
+            t.thumbnail((x1 - x0 - 24, y1 - y0 - 24), Image.LANCZOS)
+            # 四邊羽化淡進同一個底色：各張模擬圖的背景（地平線、漸層）高度不同，硬拼會看到一塊一塊的邊
+            f = max(8, int(min(t.size) * .08))
+            mask = Image.new('L', (t.width - 2 * f, t.height - 2 * f), 255)
+            mask = ImageOps.expand(mask, f, 0).filter(ImageFilter.GaussianBlur(f / 2))
+            sheet.paste(t, (x0 + (x1 - x0 - t.width) // 2, y0 + (y1 - y0 - t.height) // 2), mask)
+        media.setdefault(pid, {})['cover'] = save_pair(sheet, os.path.join(ROOT, 'assets', 'img', pid, 'cover'), True)
+        print(pid, 'cover', n)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--force', action='store_true')
-    ap.add_argument('--only', choices=['photos', 'videos', 'brand'])
+    ap.add_argument('--only', choices=['photos', 'videos', 'brand', 'renders'])
     a = ap.parse_args()
     media_path = os.path.join(ROOT, 'data', 'media.json')
     media = json.load(open(media_path, encoding='utf-8')) if os.path.exists(media_path) else {}
@@ -297,6 +358,8 @@ def main():
         build_photos(media, a.force)
     if a.only in (None, 'videos'):
         build_videos(media, a.force)
+    if a.only in (None, 'renders'):
+        build_renders(media, a.force)
     os.makedirs(os.path.dirname(media_path), exist_ok=True)
     json.dump(media, open(media_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print('wrote', media_path)

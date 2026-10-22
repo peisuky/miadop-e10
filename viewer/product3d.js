@@ -531,7 +531,7 @@ const BUILDERS = { acrylic: buildAcrylic, badge: buildBadge, keychain: buildKeyc
 
 // ---------- 檢視器 ----------
 
-export async function createProductViewer(container, { src, background = 0xf1eee8, autoRotate = true } = {}) {
+export async function createProductViewer(container, { src, background = 0xf1eee8, autoRotate = true, fit = 1 } = {}) {
   const dir = src.slice(0, src.lastIndexOf('/') + 1);
   const spec = await (await fetch(src)).json();
 
@@ -589,7 +589,7 @@ export async function createProductViewer(container, { src, background = 0xf1eee
 
   // ---- 控制 ----
   const camera = new THREE.PerspectiveCamera(28, 1, 1, 2000);
-  const dist = item.size * 2.3;
+  const dist = item.size * 2.3 * fit;              // fit > 1：鏡頭拉遠一點（拍模擬圖時四周多留空間）
   const hold = item.hold;                         // 鑰匙圈：拖曳是轉商品本身（鏈條才會甩），鏡頭固定在正面
   if (hold) camera.position.set(0, item.center + item.size * 0.12, dist);
   else camera.position.setFromSpherical(new THREE.Spherical(dist, 1.32, 0)).add(new THREE.Vector3(0, item.center, 0));   // 和「正面」按鈕同一個角度
