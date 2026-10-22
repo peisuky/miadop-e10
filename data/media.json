@@ -723,8 +723,8 @@
  "kenku-standee": {
   "photos": [],
   "cover": {
-   "src": "assets/img/kenku-standee/cover.webp?v=3af4efa2",
-   "thumb": "assets/img/kenku-standee/cover_t.webp?v=0879900c",
+   "src": "assets/img/kenku-standee/cover.webp?v=c38a68b9",
+   "thumb": "assets/img/kenku-standee/cover_t.webp?v=3fa5db75",
    "w": 1280,
    "h": 1600
   }
@@ -798,15 +798,15 @@
  "kenku-standee/ken": {
   "photos": [
    {
-    "src": "assets/img/kenku-standee/ken/01.webp?v=038dea5a",
-    "thumb": "assets/img/kenku-standee/ken/01_t.webp?v=8598c17b",
+    "src": "assets/img/kenku-standee/ken/01.webp?v=5b5ea47d",
+    "thumb": "assets/img/kenku-standee/ken/01_t.webp?v=5c209104",
     "w": 1280,
     "h": 1600
    }
   ],
   "render": {
-   "src": "assets/img/kenku-standee/ken/render.webp?v=63604308",
-   "thumb": "assets/img/kenku-standee/ken/render_t.webp?v=0f4024b5",
+   "src": "assets/img/kenku-standee/ken/render.webp?v=97ee84da",
+   "thumb": "assets/img/kenku-standee/ken/render_t.webp?v=91239a67",
    "w": 1048,
    "h": 1309
   }
@@ -814,15 +814,15 @@
  "kenku-standee/fred": {
   "photos": [
    {
-    "src": "assets/img/kenku-standee/fred/01.webp?v=88dba21b",
-    "thumb": "assets/img/kenku-standee/fred/01_t.webp?v=c81b194f",
+    "src": "assets/img/kenku-standee/fred/01.webp?v=7e7de49e",
+    "thumb": "assets/img/kenku-standee/fred/01_t.webp?v=5ddf7d20",
     "w": 1280,
     "h": 1600
    }
   ],
   "render": {
-   "src": "assets/img/kenku-standee/fred/render.webp?v=402e41d3",
-   "thumb": "assets/img/kenku-standee/fred/render_t.webp?v=4528a791",
+   "src": "assets/img/kenku-standee/fred/render.webp?v=90fa7cb9",
+   "thumb": "assets/img/kenku-standee/fred/render_t.webp?v=3a9fe906",
    "w": 990,
    "h": 1238
   }
@@ -884,21 +884,21 @@
  "miadop-standee-big": {
   "photos": [
    {
-    "src": "assets/img/miadop-standee-big/01.webp?v=789f2dd9",
-    "thumb": "assets/img/miadop-standee-big/01_t.webp?v=1398fa72",
+    "src": "assets/img/miadop-standee-big/01.webp?v=38d1b89e",
+    "thumb": "assets/img/miadop-standee-big/01_t.webp?v=2f8c21ca",
     "w": 1279,
     "h": 1600
    },
    {
-    "src": "assets/img/miadop-standee-big/02.webp?v=db58f714",
-    "thumb": "assets/img/miadop-standee-big/02_t.webp?v=55a28b49",
+    "src": "assets/img/miadop-standee-big/02.webp?v=13e90c2d",
+    "thumb": "assets/img/miadop-standee-big/02_t.webp?v=3629157d",
     "w": 1279,
     "h": 1600
    }
   ],
   "render": {
-   "src": "assets/img/miadop-standee-big/render.webp?v=4ea065c0",
-   "thumb": "assets/img/miadop-standee-big/render_t.webp?v=57aeb17b",
+   "src": "assets/img/miadop-standee-big/render.webp?v=b970312a",
+   "thumb": "assets/img/miadop-standee-big/render_t.webp?v=7b6db9a9",
    "w": 993,
    "h": 1242
   }
